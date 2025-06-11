@@ -1,0 +1,101 @@
+{
+	"className": "TimelineGraphData",
+	"description": {},
+	"footNote": {
+		"en": "For illustration purpose only, non-medical use. "
+	},
+	"height": 400,
+	"id": "SUBJECT_OVERVIEW",
+	"legendWidth": 200,
+	"longname": {},
+	"periods": [
+		{
+			"label": "Study",
+			"default": true,
+			"start_date_string": "2021-12-06T06:00:00.060Z",
+			"stop_date_string": "2021-12-06T06:00:00.080Z"
+		}
+	],
+	"scrollerHeight": 50,
+	"sections": [
+		{
+			"id": "EVENTS_1",
+			"useScopePaths": false,
+			"eventModelIds": [],
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"metaAttributeIds": [],
+			"type": "ACTION",
+			"label": {
+				"en": "Events 1"
+			},
+			"tooltip": {
+				"en": "${entry.label}"
+			},
+			"color": "#00ff00",
+			"strokeColor": "#00ff00",
+			"opacity": 1.0,
+			"dashed": false,
+			"position": {
+				"start": 10,
+				"stop": 20,
+				"className": "TimelineGraphSectionPosition"
+			},
+			"hiddenLegend": false,
+			"hidden": false,
+			"references": [],
+			"values": [
+				{
+					"ongoing": false,
+					"label": "Event 1",
+					"link": "/4",
+					"metadata": {},
+					"date_string": "2021-12-06T06:00:00.064Z"
+				}
+			],
+			"className": "TimelineGraphDataSection"
+		},
+		{
+			"id": "EVENTS_2",
+			"useScopePaths": false,
+			"eventModelIds": [],
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"metaAttributeIds": [],
+			"type": "ACTION",
+			"label": {
+				"en": "Events 2"
+			},
+			"tooltip": {
+				"en": "${entry.label}"
+			},
+			"color": "#ff0000",
+			"strokeColor": "#ff0000",
+			"opacity": 1.0,
+			"dashed": false,
+			"position": {
+				"start": 0,
+				"stop": 10,
+				"className": "TimelineGraphSectionPosition"
+			},
+			"hiddenLegend": false,
+			"hidden": false,
+			"references": [],
+			"values": [
+				{
+					"ongoing": false,
+					"label": "Event 2",
+					"link": "/4",
+					"metadata": {},
+					"date_string": "2021-12-06T06:00:00.512Z"
+				}
+			],
+			"className": "TimelineGraphDataSection"
+		}
+	],
+	"shortname": {
+		"en": "Subject overview"
+	},
+	"showScroller": true,
+	"width": 1000
+}

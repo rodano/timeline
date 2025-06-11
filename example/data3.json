@@ -1,0 +1,312 @@
+{
+	"description": {},
+	"entity": "TIMELINE_GRAPH",
+	"height": 500,
+	"id": "PATIENT_OVERVIEW",
+	"legendWidth": 200,
+	"longname": {},
+	"periods": [
+		{
+			"label": "Study",
+			"start_date_string": "2021-03-15T11:38:12Z",
+			"stop_date_string": "2021-03-17T18:35:46Z",
+			"default": true
+		}
+	],
+	"scrollerHeight": 40,
+	"sections": [
+		{
+			"values": [
+				{
+					"label": "Baseline visit",
+					"link": "/crf/11/10",
+					"ongoing": false,
+					"date_string": "2021-03-15T11:38:12Z"
+				},
+				{
+					"label": "Visit day 1",
+					"link": "/crf/11/6",
+					"ongoing": false,
+					"date_string": "2021-03-16T07:42:06Z"
+				},
+				{
+					"label": "Visit day 2",
+					"link": "/crf/11/24",
+					"ongoing": false,
+					"date_string": "2021-03-17T18:35:46Z"
+				}
+			],
+			"id": "VISITS",
+			"type": "ACTION",
+			"hidden": false,
+			"position": {
+				"stop": null,
+				"start": null,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"color": "#808080",
+			"label": {
+				"en": "Visits"
+			},
+			"mark": "CIRCLE",
+			"hiddenLegend": true,
+			"hideDoneEvent": false,
+			"attributeIds": [],
+			"eventGroupIds": [],
+			"tooltip": {
+				"en": "${entry.label || section.label.en || ''}\n${entry.date.toFullDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"opacity": 1.0,
+			"useScopePaths": false,
+			"dashed": false,
+			"references": [],
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false
+		},
+		{
+			"values": [
+				{
+					"label": "Visit day 7",
+					"ongoing": false,
+					"date_string": "2021-03-22T00:00:00Z"
+				}
+			],
+			"id": "EXPECTED_VISITS",
+			"type": "ACTION",
+			"hidden": false,
+			"position": {
+				"stop": null,
+				"start": null,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"color": "#000000",
+			"label": {
+				"en": "Expected visits"
+			},
+			"mark": "CIRCLE",
+			"hiddenLegend": true,
+			"hideDoneEvent": false,
+			"attributeIds": [],
+			"eventGroupIds": [],
+			"tooltip": {
+				"en": "Expected visit\n${entry.date.toFullDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"opacity": 1.0,
+			"useScopePaths": false,
+			"dashed": true,
+			"references": [],
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false
+		},
+		{
+			"values": [
+				{
+					"label": "Avonex",
+					"ongoing": false,
+					"date_string": "2021-02-27T00:00:00Z",
+					"end_date_string": "2021-02-28T00:00:00Z",
+					"link": "/crf/11/10"
+				},
+				{
+					"label": "Betaferon",
+					"ongoing": true,
+					"date_string": "2021-03-01T00:00:00Z",
+					"end_date_string": "2021-03-17T00:00:00Z",
+					"link": "/crf/11/10"
+				}
+			],
+			"id": "DMT",
+			"type": "PERIOD",
+			"hidden": false,
+			"position": {
+				"stop": 75,
+				"start": 60,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"color": "#008800",
+			"label": {
+				"en": "Treatments"
+			},
+			"mark": "CIRCLE",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"attributeIds": [],
+			"eventGroupIds": [],
+			"tooltip": {
+				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"opacity": 1.0,
+			"useScopePaths": false,
+			"dashed": false,
+			"references": [],
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false
+		},
+		{
+			"values": [
+				{
+					"label": "Level 1 relapse",
+					"link": "/crf/11/6",
+					"ongoing": false,
+					"date_string": "2021-03-15T14:30:28Z"
+				},
+				{
+					"label": "Level 2 relapse",
+					"link": "/crf/11/6",
+					"ongoing": false,
+					"date_string": "2021-03-16T05:48:12Z"
+				}
+			],
+			"id": "RELAPSE",
+			"type": "DATE",
+			"hidden": false,
+			"position": {
+				"stop": 50,
+				"start": 50,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"color": "#ff0000",
+			"label": {
+				"en": "Relapses"
+			},
+			"mark": "DIAMOND",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"attributeIds": [],
+			"eventGroupIds": [],
+			"tooltip": {
+				"en": "Relapse\nStart date: ${entry.date.toFullDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"opacity": 1.0,
+			"useScopePaths": false,
+			"dashed": false,
+			"references": [],
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false
+		},
+		{
+			"values": [
+				{
+					"value": 3.0,
+					"label": "3.0",
+					"ongoing": false,
+					"date_string": "2021-03-15T00:00:00Z",
+					"metadata": {
+						"rank": 3,
+						"status": "good"
+					},
+					"link": "/crf/11/10"
+				},
+				{
+					"value": 3.5,
+					"label": "3.5",
+					"ongoing": false,
+					"date_string": "2021-03-16T00:00:00Z",
+					"metadata": {
+						"rank": 45,
+						"status": "bad"
+					},
+					"link": "/crf/11/10"
+				},
+				{
+					"value": 3.5,
+					"label": "3.5",
+					"ongoing": false,
+					"date_string": "2021-03-17T00:00:00Z",
+					"metadata": {
+						"rank": 45,
+						"status": "bad"
+					},
+					"link": "/crf/11/10"
+				}
+			],
+			"id": "EDSS",
+			"type": "LINE",
+			"hidden": false,
+			"position": {
+				"stop": 40,
+				"start": 0,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"color": "#ffc040",
+			"scale": {
+				"position": "LEFT",
+				"max": 10,
+				"labelInterval": 2.0,
+				"markInterval": 0.5,
+				"min": 0,
+				"decimal": 1,
+				"entity": "TIMELINE_GRAPH_SECTION_SCALE"
+			},
+			"label": {
+				"en": "EDSS"
+			},
+			"mark": "CIRCLE",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"attributeIds": [],
+			"eventGroupIds": [],
+			"tooltip": {
+				"en": "EDSS\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}\nRank: ${entry.metadata.rank}\nStatus: ${entry.metadata.status}"
+			},
+			"strokeColor": "#000000",
+			"opacity": 1.0,
+			"useScopePaths": false,
+			"dashed": false,
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false
+		},
+		{
+			"values": [
+				{
+					"label": "CCU",
+					"ongoing": false,
+					"date_string": "2021-03-15T11:25:05Z",
+					"end_date_string": "2021-03-15T17:35:54Z"
+				},
+				{
+					"label": "ICU",
+					"ongoing": true,
+					"date_string": "2021-03-15T17:39:08Z",
+					"end_date_string": "2021-03-17T12:35:00Z"
+				}
+			],
+			"id": "LOCATION",
+			"type": "PERIOD",
+			"hidden": false,
+			"position": {
+				"stop": 95,
+				"start": 80,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"color": "#000000",
+			"label": {
+				"en": "Units"
+			},
+			"mark": "CIRCLE",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"attributeIds": [],
+			"eventGroupIds": [],
+			"tooltip": {
+				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toFullDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toFullDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"opacity": 1.0,
+			"useScopePaths": false,
+			"dashed": false,
+			"references": [],
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false
+		}
+	],
+	"shortname": {
+		"en": "Patient overview"
+	},
+	"showScroller": true,
+	"width": 1000
+}

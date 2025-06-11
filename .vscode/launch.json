@@ -1,0 +1,64 @@
+{
+	"version": "0.2.0",
+	"compounds": [
+		{
+			"name": "Start & Debug",
+			"configurations": ["Start server", "Launch Chrome Unix"]
+		}
+	],
+	"configurations": [
+		{
+			"name": "Start server",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceRoot}",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": ["start"]
+		},
+		{
+			"name": "Launch Firefox",
+			"type": "firefox",
+			"request": "launch",
+			"reAttach": true,
+			"url": "http://localhost:9000",
+			"webRoot": "${workspaceRoot}/example"
+		},
+		{
+			"name": "Attach to existing Firefox",
+			"type": "firefox",
+			"request": "attach",
+			"url": "http://localhost:9000/*",
+			"webRoot": "${workspaceRoot}/example",
+		},
+		{
+			"name": "Launch Chrome",
+			"type": "chrome",
+			"request": "launch",
+			"userDataDir": "${workspaceRoot}/.vscode/chrome", //customize user data dir to force VSC to open a new instance of Chrome with remote debug flag enabled
+			"windows": {
+				"runtimeExecutable": "C:/Program Files (x86)/Google/Chrome/Application/Chrome.exe",
+			},
+			"url": "http://localhost:9000",
+			"webRoot": "${workspaceRoot}/example"
+		},
+		{
+			"name": "Launch Chrome Beta",
+			"type": "chrome",
+			"request": "launch",
+			"userDataDir": "${workspaceRoot}/.vscode/chrome", //customize user data dir to force VSC to open a new instance of Chrome with remote debug flag enabled
+			"windows": {
+				"runtimeExecutable": "C:/Program Files/Google/Chrome Beta/Application/chrome.exe",
+			},
+			"url": "http://localhost:9000",
+			"webRoot": "${workspaceRoot}/example",
+		},
+		{
+			"name": "Attach to existing Chrome",
+			"type": "chrome",
+			"request": "attach",
+			"url": "http://localhost:9000/*",
+			"webRoot": "${workspaceRoot}/example",
+			"port": 9222
+		}
+	]
+}

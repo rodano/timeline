@@ -1,0 +1,12 @@
+@import url(../src/timeline.css);
+
+html {
+	font-family: 'Open Sans';
+}
+div {
+	padding: 2rem 1rem;
+	border-bottom: 1px solid #aaa;
+}
+#graph1 {
+	margin: 0 5rem;
+}

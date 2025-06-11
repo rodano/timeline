@@ -1,0 +1,8 @@
+/node_modules
+/dist
+
+#embedded Chrome profile
+/.vscode/chrome
+
+#NPM packages
+/*.tgz

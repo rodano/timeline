@@ -1,0 +1,169 @@
+{
+	"periods": [],
+	"id": "GENERAL",
+	"scopeModelId": "Patient",
+	"legendWidth": 150,
+	"scrollerHeight": 35,
+	"showScroller": true,
+	"height": 400,
+	"sections": [
+		{
+			"id": "EVENTS",
+			"type": "ACTION",
+			"label": {
+				"en": "Visits",
+				"fr": "Visites"
+			},
+			"color": "red",
+			"position": {"start": 90, "stop": 100},
+			"hiddenLegend": false,
+			"dashed": true,
+			"tooltip": {
+				"en": "Visit date: ${entry.date.toDisplay()}"
+			},
+			"values": [
+				{"date_string": "2008-01-01T00:00:00Z", "link": "https://www.wikipedia.org"},
+				{"date_string": "2008-02-07T00:00:00Z", "link": "https://www.google.com"},
+				{"date_string": "2008-08-18T00:00:00Z"},
+				{"date_string": "2009-02-09T00:00:00Z"},
+				{"date_string": "2009-04-16T00:00:00Z"},
+				{"date_string": "2009-10-07T00:00:00Z"},
+				{"date_string": "2010-03-26T00:00:00Z"},
+				{"date_string": "2010-07-12T00:00:00Z"},
+				{"date_string": "2011-01-25T00:00:00Z", "link": "https://www.wikipedia.org"}
+			]
+		},
+		{
+			"id": "SAE",
+			"type": "ACTION",
+			"label": {
+				"en": "SAE",
+				"fr": "EIG"
+			},
+			"color": "blue",
+			"position": {"start": 80, "stop": 90},
+			"tooltip": {
+				"en": "SAE date: ${entry.date.toDisplay()}"
+			},
+			"values": [
+				{"date_string": "2008-04-08T00:00:00Z"}
+			]
+		},
+		{
+			"id": "EDSS",
+			"type": "LINE",
+			"mark": "CIRCLE",
+			"label": {
+				"en": "EDSS",
+				"fr": "EDSS"
+			},
+			"color": "orange",
+			"position": {"start": 0, "stop": 50},
+			"scale": {
+				"position": "LEFT",
+				"min": 0,
+				"max": 10,
+				"decimal": 1,
+				"markInterval": 0.5,
+				"labelInterval": 2
+			},
+			"tooltip": {
+				"en": "EDSS\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}"
+			},
+			"values": [
+				{"value": 3.0,"date_string": "2008-02-07T00:00:00Z"},
+				{"value": 2.0,"date_string": "2008-08-18T00:00:00Z"},
+				{"value": 2.0,"date_string": "2009-02-09T00:00:00Z"},
+				{"value": 2.5,"date_string": "2009-04-16T00:00:00Z"}
+			]
+		},
+		{
+			"id": "TREATMENTS",
+			"type": "PERIOD",
+			"label": {
+				"en": "Treatment",
+				"fr": "Traitement"
+			},
+			"color": "#92E8B3",
+			"position": {"start": 75},
+			"hidden": false,
+			"tooltip": {
+				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
+			},
+			"values": [
+				{"label": "Treatment","date_string": "2006-11-01T00:00:00Z","end_date_string": "2007-12-01T00:00:00Z"},
+				{"label": "Treatment 2","date_string": "2007-08-12T00:00:00Z","end_date_string": "2009-05-16T00:00:00Z"},
+				{"label": "Other","date_string": "2010-03-28T00:00:00Z","end_date_string": "2009-08-01T00:00:00Z"},
+				{"label": "Ongoing","date_string": "2010-03-26T00:00:00Z", "end_date_string": "2010-07-26T00:00:00Z", "ongoing": true},
+				{"label": "One day treatment","date_string": "2009-06-01T00:00:00Z","end_date_string": "2009-06-02T00:00:00Z"}
+			]
+		},
+		{
+			"id": "QOL",
+			"type": "DATE",
+			"mark": "DIAMOND",
+			"label": {
+				"en": "QoL",
+				"fr": "QdV"
+			},
+			"color": "blue",
+			"position": {"start": 60},
+			"values": [
+				{"date_string": "2007-10-26T00:00:00Z", "icon": "happy.png"},
+				{"date_string": "2008-05-14T00:00:00Z", "icon": "sad.png"},
+				{"date_string": "2009-01-12T00:00:00Z", "icon": "sad.png"}
+			]
+		},
+		{
+			"id": "RELAPSES",
+			"type": "DATE",
+			"mark": "DIAMOND",
+			"label": {
+				"en": "Relapses",
+				"fr": "Poussées"
+			},
+			"color": "purple",
+			"position": {"start": 55},
+			"tooltip": {
+				"en": "Relapse date: ${entry.date.toDisplay()}",
+				"fr": "Date de la poussée : ${entry.date.toDisplay()}"
+			},
+			"values": [
+				{"date_string": "2008-02-07T00:00:00Z"},
+				{"date_string": "2008-08-18T00:00:00Z"}
+			]
+		},
+		{
+			"id": "ADHERENCE",
+			"type": "BAR",
+			"label": {
+				"en": "Adherence",
+				"fr": "Adhérence"
+			},
+			"color": "yellow",
+			"strokeColor": "orange",
+			"opacity": 0.5,
+			"position": {"start": 0, "stop": 50},
+			"scale": {
+				"min": 0,
+				"max": 100,
+				"decimal": 0,
+				"markInterval": 20,
+				"labelInterval": 20,
+				"position": "RIGHT"
+			},
+			"tooltip": {
+				"en": "Adherence\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.end_date.toDisplay()}\nValue: ${entry.value}"
+			},
+			"values": [
+				{"date_string": "2008-02-07T00:00:00Z", "end_date_string": "2008-03-15T00:00:00Z", "value": 40},
+				{"date_string": "2008-03-15T00:00:00Z", "end_date_string": "2008-04-26T00:00:00Z", "value": 60},
+				{"date_string": "2008-04-26T00:00:00Z", "end_date_string": "2008-06-02T00:00:00Z", "value": 80},
+				{"date_string": "2008-06-02T00:00:00Z", "end_date_string": "2008-07-10T00:00:00Z", "value": 70},
+				{"date_string": "2008-08-18T00:00:00Z", "end_date_string": "2008-09-20T00:00:00Z", "value": 90},
+				{"date_string": "2008-09-20T00:00:00Z", "end_date_string": "2008-10-30T00:00:00Z", "value": 80},
+				{"date_string": "2008-10-30T00:00:00Z", "end_date_string": "2008-12-02T00:00:00Z", "value": 100}
+			]
+		}
+	]
+}

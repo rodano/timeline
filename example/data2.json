@@ -1,0 +1,1198 @@
+{
+	"description": {},
+	"entity": "TIMELINE_GRAPH",
+	"height": 600,
+	"id": "PATIENT_OVERVIEW",
+	"legendWidth": 200,
+	"longname": {},
+	"periods": [
+		{
+			"label": "Study",
+			"start_date_string": "2016-08-15T00:00:00Z",
+			"stop_date_string": "2019-02-15T00:00:00Z",
+			"default": true
+		},
+		{
+			"label": "Baseline",
+			"start_date_string": "2016-08-14T23:58:00Z",
+			"stop_date_string": "2016-08-15T00:05:00Z"
+		}
+	],
+	"scrollerHeight": 40,
+	"sections": [
+		{
+			"values": [
+				{
+					"label": "Baseline visit",
+					"link": "/crf/1/1",
+					"ongoing": false,
+					"date_string": "2016-08-15T00:00:00Z"
+				},
+				{
+					"label": "Visit 6 months",
+					"link": "/crf/1/2",
+					"ongoing": false,
+					"date_string": "2017-01-20T00:00:00Z"
+				},
+				{
+					"label": "Visit 12 months",
+					"link": "/crf/1/3",
+					"ongoing": false,
+					"date_string": "2017-08-15T00:00:00Z"
+				},
+				{
+					"label": "Visit 18 months",
+					"link": "/crf/1/4",
+					"ongoing": false,
+					"date_string": "2018-02-15T00:00:00Z"
+				}
+			],
+			"id": "VISITS",
+			"type": "ACTION",
+			"hidden": false,
+			"color": "#808080",
+			"position": {
+				"start": null,
+				"stop": null,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "CIRCLE",
+			"label": {
+				"en": "Visits"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": false,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "${entry.label}\n${entry.date.toDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": true
+		},
+		{
+			"values": [
+				{
+					"label": "Visit 24 months",
+					"ongoing": false,
+					"date_string": "2018-08-15T00:00:00Z"
+				},
+				{
+					"label": "Termination visit",
+					"ongoing": false,
+					"date_string": "2019-02-15T00:00:00Z"
+				}
+			],
+			"id": "EXPECTED_VISITS",
+			"type": "ACTION",
+			"hidden": false,
+			"color": "#000000",
+			"position": {
+				"start": null,
+				"stop": null,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "CIRCLE",
+			"label": {
+				"en": "Expected visits"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": true,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "${entry.label} (expected)\n${entry.date.toDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": true
+		},
+		{
+			"values": [
+				{
+					"label": "Avonex",
+					"ongoing": true,
+					"link": "https://www.drugs.com/avonex.html",
+					"end_date_string": "2018-02-15T00:00:00Z",
+					"date_string": "2015-08-02T00:00:00Z"
+				},
+				{
+					"label": "Betaferon",
+					"ongoing": false,
+					"link": "https://www.drugs.com/uk/betaferon.html",
+					"end_date_string": "2015-08-01T00:00:00Z",
+					"date_string": "2014-10-01T00:00:00Z"
+				}
+			],
+			"id": "DMT",
+			"type": "PERIOD",
+			"hidden": false,
+			"color": "#00bf00",
+			"position": {
+				"start": 90,
+				"stop": 90,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "CIRCLE",
+			"label": {
+				"en": "DMT"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": false,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": false
+		},
+		{
+			"id": "OTHER_TREATMENT",
+			"type": "PERIOD",
+			"hidden": false,
+			"color": "#00ff00",
+			"position": {
+				"start": 85,
+				"stop": 85,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"label": {
+				"en": "Other treatment"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"mark": "CIRCLE",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"useScopePaths": false,
+			"hideExpectedEvent": false,
+			"tooltip": {
+				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
+			},
+			"dashed": false,
+			"opacity": 1.0,
+			"values": [
+				{
+					"label": "Psychotherapy",
+					"ongoing": false,
+					"end_date_string": "2017-03-06T00:00:00Z",
+					"date_string": "2015-12-30T00:00:00Z"
+				},
+				{
+					"ongoing": true,
+					"end_date_string": "2018-02-15T00:00:00Z",
+					"date_string": "2016-06-27T00:00:00Z"
+				}
+			]
+		},
+		{
+			"id": "PREGNANCIES",
+			"type": "DATE",
+			"hidden": false,
+			"color": "#840084",
+			"position": {
+				"start": 70,
+				"stop": 70,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"label": {
+				"en": "Pregnancies"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"mark": "CIRCLE",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"useScopePaths": false,
+			"hideExpectedEvent": false,
+			"tooltip": {
+				"en": "Begin date: ${entry.date.toDisplay()}"
+			},
+			"dashed": false,
+			"opacity": 1.0
+		},
+		{
+			"values": [
+				{
+					"label": "06.2010",
+					"link": "/crf/11/10",
+					"ongoing": false,
+					"date_string": "2010-06-01T00:00:00Z"
+				}
+			],
+			"id": "FIRST_SYMPTOMS",
+			"type": "DATE",
+			"hidden": false,
+			"position": {
+				"stop": 65,
+				"start": 65,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"color": "#666",
+			"label": {
+				"en": "First symptoms"
+			},
+			"mark": "SQUARE",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"attributeIds": [],
+			"eventGroupIds": [],
+			"tooltip": {
+				"en": "Date of first symptoms\n${entry.date.toDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"opacity": 1.0,
+			"useScopePaths": false,
+			"dashed": false,
+			"references": [],
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false
+		},
+		{
+			"values": [
+				{
+					"label": "26.12.2013",
+					"link": "/crf/11/10",
+					"ongoing": false,
+					"date_string": "2013-12-26T00:00:00Z"
+				},
+				{
+					"label": "03.10.2014",
+					"link": "/crf/11/10",
+					"ongoing": false,
+					"date_string": "2014-10-03T00:00:00Z"
+				},
+				{
+					"label": "12.02.2016",
+					"link": "/crf/11/10",
+					"ongoing": false,
+					"date_string": "2016-02-12T00:00:00Z"
+				}
+			],
+			"id": "RELAPSES",
+			"type": "DATE",
+			"hidden": false,
+			"color": "#ff0000",
+			"position": {
+				"start": 60,
+				"stop": 60,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "DIAMOND",
+			"label": {
+				"en": "Relapses"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": false,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "Relapse\nStart date: ${entry.date.toDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": false
+		},
+		{
+			"id": "LABORATORY_TESTS",
+			"type": "DATE",
+			"hidden": false,
+			"color": "#00ff00",
+			"position": {
+				"start": 55,
+				"stop": 55,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"label": {
+				"en": "Laboratory test"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"mark": "CIRCLE",
+			"hiddenLegend": false,
+			"hideDoneEvent": false,
+			"useScopePaths": false,
+			"hideExpectedEvent": false,
+			"tooltip": {
+				"en": "${entry.metadata.type}\n${entry.label}"
+			},
+			"dashed": false,
+			"opacity": 1.0,
+			"values": [
+				{
+					"label": "22 October 2012",
+					"ongoing": false,
+					"date_string": "2012-10-22T10:31:00Z",
+					"metadata": {
+						"type": "Blood test"
+					}
+				},
+				{
+					"label": "6 June 2013",
+					"ongoing": false,
+					"date_string": "2013-06-06T10:55:00Z",
+					"metadata": {
+						"type": "Urine test"
+					}
+				},
+				{
+					"label": "25 November 2014",
+					"ongoing": false,
+					"date_string": "2014-11-25T14:32:00Z",
+					"metadata": {
+						"type": "Blood test"
+					}
+				}
+			]
+		},
+		{
+			"values": [
+				{
+					"value": 0.2,
+					"label": "0.2",
+					"ongoing": false,
+					"date_string": "2013-01-09T00:00:00Z"
+				},
+				{
+					"value": 0.25,
+					"label": "0.25",
+					"ongoing": false,
+					"date_string": "2014-01-09T00:00:00Z"
+				},
+				{
+					"value": 0.3,
+					"label": "0.6",
+					"ongoing": false,
+					"date_string": "2016-08-15T00:00:00Z"
+				},
+				{
+					"value": 0.4,
+					"label": "0.2",
+					"ongoing": false,
+					"date_string": "2017-01-20T00:00:00Z"
+				},
+				{
+					"value": 0.8,
+					"label": "0.8",
+					"ongoing": false,
+					"date_string": "2018-02-20T00:00:00Z"
+				}
+			],
+			"id": "MRI_LESION_VOLUME",
+			"type": "LINE",
+			"hidden": false,
+			"scale": {
+				"position": "RIGHT",
+				"min": 0,
+				"max": 1,
+				"labelInterval": 0.2,
+				"entity": "TIMELINE_GRAPH_SECTION_SCALE",
+				"decimal": 1,
+				"markInterval": 0.1
+			},
+			"color": "red",
+			"position": {
+				"start": 0,
+				"stop": 40,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "CIRCLE",
+			"label": {
+				"en": "MRI lesion"
+			},
+			"unit": "mm^3",
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": true,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "EDSS\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": false
+		},
+		{
+			"values": [
+				{
+					"value": 4,
+					"label": "4.0",
+					"ongoing": false,
+					"date_string": "2016-08-15T00:00:00Z",
+					"metadata": {
+						"rank": 18
+					}
+				},
+				{
+					"value": 4,
+					"label": "4.0",
+					"ongoing": false,
+					"date_string": "2017-01-20T00:00:00Z",
+					"metadata": {
+						"rank": 17
+					}
+				},
+				{
+					"value": 4.5,
+					"label": "4.5",
+					"ongoing": false,
+					"date_string": "2017-08-15T00:00:00Z",
+					"metadata": {
+						"rank": 20
+					}
+				},
+				{
+					"value": 5.5,
+					"label": "5.5",
+					"ongoing": false,
+					"date_string": "2018-02-15T00:00:00Z",
+					"metadata": {
+						"rank": 82
+					}
+				}
+			],
+			"id": "EDSS",
+			"type": "LINE",
+			"hidden": false,
+			"scale": {
+				"position": "LEFT",
+				"min": 0,
+				"max": 10,
+				"labelInterval": 2,
+				"entity": "TIMELINE_GRAPH_SECTION_SCALE",
+				"decimal": 1,
+				"markInterval": 0.5
+			},
+			"color": "#ff9966",
+			"position": {
+				"start": 0,
+				"stop": 40,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "CIRCLE",
+			"label": {
+				"en": "EDSS"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": false,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "EDSS\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}\nRank: ${entry.metadata.rank}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": false,
+			"references": [
+				{
+					"label": {
+						"en": "80% percentile",
+						"fr": "80% percentile"
+					},
+					"entries": [
+						{
+							"value": 2.0,
+							"label": "2.0",
+							"timepoint": "0",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 2.0,
+							"label": "2.0",
+							"timepoint": "6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.0,
+							"label": "3.0",
+							"timepoint": "1y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.0,
+							"label": "3.0",
+							"timepoint": "1y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.0,
+							"label": "3.0",
+							"timepoint": "2y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 4.0,
+							"label": "4.0",
+							"timepoint": "2y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 4.0,
+							"label": "4.0",
+							"timepoint": "3y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 4.0,
+							"label": "4.0",
+							"timepoint": "3y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 5.0,
+							"label": "5.0",
+							"timepoint": "4y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 5.0,
+							"label": "5.0",
+							"timepoint": "4y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 5.0,
+							"label": "5.0",
+							"timepoint": "5y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 5.5,
+							"label": "5.5",
+							"timepoint": "5y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 5.5,
+							"label": "5.5",
+							"timepoint": "6y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 5.5,
+							"label": "5.5",
+							"timepoint": "6y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 6.0,
+							"label": "6.0",
+							"timepoint": "7y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 6.0,
+							"label": "6.0",
+							"timepoint": "7y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 6.0,
+							"label": "6.0",
+							"timepoint": "8y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						}
+					],
+					"color": "#ffcc44",
+					"tooltip": {
+						"en": "80% percentile\n${entry.label}"
+					},
+					"dashed": true,
+					"entity": "TIMELINE_GRAPH_SECTION_REFERENCE",
+					"referenceSectionId": "FIRST_SYMPTOMS"
+				},
+				{
+					"label": {
+						"en": "20% percentile",
+						"fr": "20% percentile"
+					},
+					"entries": [
+						{
+							"value": 1.0,
+							"label": "1.0",
+							"timepoint": "0",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 1.0,
+							"label": "1.0",
+							"timepoint": "6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 1.5,
+							"label": "1.5",
+							"timepoint": "1y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 1.5,
+							"label": "1.5",
+							"timepoint": "1y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 2.0,
+							"label": "2.0",
+							"timepoint": "2y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 2.0,
+							"label": "2.0",
+							"timepoint": "2y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 2.5,
+							"label": "2.5",
+							"timepoint": "3y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 2.5,
+							"label": "2.5",
+							"timepoint": "3y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 2.5,
+							"label": "2.5",
+							"timepoint": "4y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.0,
+							"label": "3.0",
+							"timepoint": "4y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.0,
+							"label": "3.0",
+							"timepoint": "5y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.0,
+							"label": "3.0",
+							"timepoint": "5y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.5,
+							"label": "3.5",
+							"timepoint": "6y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.5,
+							"label": "3.5",
+							"timepoint": "6y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 3.5,
+							"label": "3.5",
+							"timepoint": "7y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 4.0,
+							"label": "4.0",
+							"timepoint": "7y6m",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						},
+						{
+							"value": 4.0,
+							"label": "4.0",
+							"timepoint": "8y",
+							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+						}
+					],
+					"color": "#ffddcc",
+					"tooltip": {
+						"en": "20% percentile\n${entry.label}"
+					},
+					"dashed": true,
+					"entity": "TIMELINE_GRAPH_SECTION_REFERENCE",
+					"referenceSectionId": "FIRST_SYMPTOMS"
+				}
+			]
+		},
+		{
+			"values": [
+				{
+					"label": "FR-01",
+					"ongoing": false,
+					"end_date_string": "2017-07-27T00:00:00Z",
+					"date_string": "2016-08-15T00:00:00Z"
+				},
+				{
+					"label": "FR-02",
+					"ongoing": true,
+					"end_date_string": "2018-02-15T00:00:00Z",
+					"date_string": "2017-07-27T00:00:00Z"
+				}
+			],
+			"id": "CENTERS",
+			"type": "PERIOD",
+			"hidden": false,
+			"color": "#000000",
+			"position": {
+				"start": 99,
+				"stop": 99,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "CIRCLE",
+			"label": {
+				"en": "Medical centers"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": false,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": false
+		},
+		{
+			"values": [
+				{
+					"value": 324979,
+					"ongoing": false,
+					"date_string": "2017-11-27T00:00:00Z"
+				},
+				{
+					"value": 301365,
+					"ongoing": false,
+					"date_string": "2017-10-27T00:00:00Z"
+				},
+				{
+					"value": 312454,
+					"ongoing": false,
+					"date_string": "2017-09-27T00:00:00Z"
+				},
+				{
+					"value": 333305,
+					"ongoing": false,
+					"date_string": "2017-08-27T00:00:00Z"
+				},
+				{
+					"value": 355908,
+					"ongoing": false,
+					"date_string": "2017-07-27T00:00:00Z"
+				},
+				{
+					"value": 332835,
+					"ongoing": false,
+					"date_string": "2017-06-27T00:00:00Z"
+				},
+				{
+					"value": 350016,
+					"ongoing": false,
+					"date_string": "2017-05-27T00:00:00Z"
+				},
+				{
+					"value": 337238,
+					"ongoing": false,
+					"date_string": "2017-04-27T00:00:00Z"
+				},
+				{
+					"value": 333486,
+					"ongoing": false,
+					"date_string": "2017-03-27T00:00:00Z"
+				},
+				{
+					"value": 353178,
+					"ongoing": false,
+					"date_string": "2017-02-27T00:00:00Z"
+				},
+				{
+					"value": 353322,
+					"ongoing": false,
+					"date_string": "2017-01-27T00:00:00Z"
+				},
+				{
+					"value": 353014,
+					"ongoing": false,
+					"date_string": "2016-12-27T00:00:00Z"
+				},
+				{
+					"value": 346503,
+					"ongoing": false,
+					"date_string": "2016-11-27T00:00:00Z"
+				},
+				{
+					"value": 368079,
+					"ongoing": false,
+					"date_string": "2016-10-27T00:00:00Z"
+				},
+				{
+					"value": 387958,
+					"ongoing": false,
+					"date_string": "2016-09-27T00:00:00Z"
+				},
+				{
+					"value": 377413,
+					"ongoing": false,
+					"date_string": "2016-08-27T00:00:00Z"
+				},
+				{
+					"value": 365657,
+					"ongoing": false,
+					"date_string": "2016-07-27T00:00:00Z"
+				},
+				{
+					"value": 344664,
+					"ongoing": false,
+					"date_string": "2016-06-27T00:00:00Z"
+				},
+				{
+					"value": 325368,
+					"ongoing": false,
+					"date_string": "2016-05-27T00:00:00Z"
+				},
+				{
+					"value": 300872,
+					"ongoing": false,
+					"date_string": "2016-04-27T00:00:00Z"
+				},
+				{
+					"value": 292795,
+					"ongoing": false,
+					"date_string": "2016-03-27T00:00:00Z"
+				},
+				{
+					"value": 280614,
+					"ongoing": false,
+					"date_string": "2016-02-27T00:00:00Z"
+				},
+				{
+					"value": 301077,
+					"ongoing": false,
+					"date_string": "2016-01-27T00:00:00Z"
+				},
+				{
+					"value": 314526,
+					"ongoing": false,
+					"date_string": "2015-12-27T00:00:00Z"
+				},
+				{
+					"value": 300279,
+					"ongoing": false,
+					"date_string": "2015-11-27T00:00:00Z"
+				},
+				{
+					"value": 309926,
+					"ongoing": false,
+					"date_string": "2015-10-27T00:00:00Z"
+				},
+				{
+					"value": 288228,
+					"ongoing": false,
+					"date_string": "2015-09-27T00:00:00Z"
+				},
+				{
+					"value": 269487,
+					"ongoing": false,
+					"date_string": "2015-08-27T00:00:00Z"
+				},
+				{
+					"value": 246870,
+					"ongoing": false,
+					"date_string": "2015-07-27T00:00:00Z"
+				},
+				{
+					"value": 262273,
+					"ongoing": false,
+					"date_string": "2015-06-27T00:00:00Z"
+				},
+				{
+					"value": 250325,
+					"ongoing": false,
+					"date_string": "2015-05-27T00:00:00Z"
+				},
+				{
+					"value": 243002,
+					"ongoing": false,
+					"date_string": "2015-04-27T00:00:00Z"
+				},
+				{
+					"value": 253667,
+					"ongoing": false,
+					"date_string": "2015-03-27T00:00:00Z"
+				},
+				{
+					"value": 273226,
+					"ongoing": false,
+					"date_string": "2015-02-27T00:00:00Z"
+				},
+				{
+					"value": 264971,
+					"ongoing": false,
+					"date_string": "2015-01-27T00:00:00Z"
+				},
+				{
+					"value": 279262,
+					"ongoing": false,
+					"date_string": "2014-12-27T00:00:00Z"
+				},
+				{
+					"value": 300386,
+					"ongoing": false,
+					"date_string": "2014-11-27T00:00:00Z"
+				},
+				{
+					"value": 316663,
+					"ongoing": false,
+					"date_string": "2014-10-27T00:00:00Z"
+				},
+				{
+					"value": 305360,
+					"ongoing": false,
+					"date_string": "2014-09-27T00:00:00Z"
+				},
+				{
+					"value": 287674,
+					"ongoing": false,
+					"date_string": "2014-08-27T00:00:00Z"
+				},
+				{
+					"value": 268557,
+					"ongoing": false,
+					"date_string": "2014-07-27T00:00:00Z"
+				},
+				{
+					"value": 244575,
+					"ongoing": false,
+					"date_string": "2014-06-27T00:00:00Z"
+				},
+				{
+					"value": 266651,
+					"ongoing": false,
+					"date_string": "2014-05-27T00:00:00Z"
+				},
+				{
+					"value": 252976,
+					"ongoing": false,
+					"date_string": "2014-04-27T00:00:00Z"
+				},
+				{
+					"value": 264143,
+					"ongoing": false,
+					"date_string": "2014-03-27T00:00:00Z"
+				},
+				{
+					"value": 249108,
+					"ongoing": false,
+					"date_string": "2014-02-27T00:00:00Z"
+				},
+				{
+					"value": 232569,
+					"ongoing": false,
+					"date_string": "2014-01-27T00:00:00Z"
+				},
+				{
+					"value": 216650,
+					"ongoing": false,
+					"date_string": "2013-12-27T00:00:00Z"
+				},
+				{
+					"value": 237156,
+					"ongoing": false,
+					"date_string": "2013-11-27T00:00:00Z"
+				},
+				{
+					"value": 219370,
+					"ongoing": false,
+					"date_string": "2013-10-27T00:00:00Z"
+				},
+				{
+					"value": 209779,
+					"ongoing": false,
+					"date_string": "2013-09-27T00:00:00Z"
+				},
+				{
+					"value": 186607,
+					"ongoing": false,
+					"date_string": "2013-08-27T00:00:00Z"
+				},
+				{
+					"value": 202871,
+					"ongoing": false,
+					"date_string": "2013-07-27T00:00:00Z"
+				},
+				{
+					"value": 225695,
+					"ongoing": false,
+					"date_string": "2013-06-27T00:00:00Z"
+				},
+				{
+					"value": 230747,
+					"ongoing": false,
+					"date_string": "2013-05-27T00:00:00Z"
+				},
+				{
+					"value": 250191,
+					"ongoing": false,
+					"date_string": "2013-04-27T00:00:00Z"
+				},
+				{
+					"value": 235180,
+					"ongoing": false,
+					"date_string": "2013-03-27T00:00:00Z"
+				},
+				{
+					"value": 249735,
+					"ongoing": false,
+					"date_string": "2013-02-27T00:00:00Z"
+				},
+				{
+					"value": 254677,
+					"ongoing": false,
+					"date_string": "2013-01-27T00:00:00Z"
+				},
+				{
+					"value": 273856,
+					"ongoing": false,
+					"date_string": "2012-12-27T00:00:00Z"
+				},
+				{
+					"value": 283558,
+					"ongoing": false,
+					"date_string": "2012-11-27T00:00:00Z"
+				},
+				{
+					"value": 258814,
+					"ongoing": false,
+					"date_string": "2012-10-27T00:00:00Z"
+				},
+				{
+					"value": 267705,
+					"ongoing": false,
+					"date_string": "2012-09-27T00:00:00Z"
+				},
+				{
+					"value": 263928,
+					"ongoing": false,
+					"date_string": "2012-08-27T00:00:00Z"
+				},
+				{
+					"value": 279520,
+					"ongoing": false,
+					"date_string": "2012-07-27T00:00:00Z"
+				},
+				{
+					"value": 259316,
+					"ongoing": false,
+					"date_string": "2012-06-27T00:00:00Z"
+				},
+				{
+					"value": 250079,
+					"ongoing": false,
+					"date_string": "2012-05-27T00:00:00Z"
+				},
+				{
+					"value": 248185,
+					"ongoing": false,
+					"date_string": "2012-04-27T00:00:00Z"
+				},
+				{
+					"value": 256652,
+					"ongoing": false,
+					"date_string": "2012-03-27T00:00:00Z"
+				},
+				{
+					"value": 266753,
+					"ongoing": false,
+					"date_string": "2012-02-27T00:00:00Z"
+				},
+				{
+					"value": 290905,
+					"ongoing": false,
+					"date_string": "2012-01-27T00:00:00Z"
+				},
+				{
+					"value": 268119,
+					"ongoing": false,
+					"date_string": "2011-12-27T00:00:00Z"
+				},
+				{
+					"value": 264639,
+					"ongoing": false,
+					"date_string": "2011-11-27T00:00:00Z"
+				},
+				{
+					"value": 266710,
+					"ongoing": false,
+					"date_string": "2011-10-27T00:00:00Z"
+				}
+			],
+			"id": "MONTHLY_STEPS",
+			"type": "LINE",
+			"hidden": false,
+			"scale": {
+				"position": "RIGHT",
+				"min": 0,
+				"max": 500000,
+				"labelInterval": 100000,
+				"entity": "TIMELINE_GRAPH_SECTION_SCALE",
+				"decimal": 0,
+				"markInterval": 50000
+			},
+			"color": "#411bf3",
+			"position": {
+				"start": 0,
+				"stop": 40,
+				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+			},
+			"mark": "CIRCLE",
+			"label": {
+				"en": "Monthly steps"
+			},
+			"entity": "TIMELINE_GRAPH_SECTION",
+			"hideExpectedEvent": false,
+			"hideDoneEvent": false,
+			"dashed": false,
+			"eventGroupIds": [],
+			"opacity": 1,
+			"useScopePaths": false,
+			"attributeIds": [],
+			"tooltip": {
+				"en": "Steps\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}"
+			},
+			"strokeColor": "#000000",
+			"hiddenLegend": false
+		}
+	],
+	"shortname": {
+		"en": "Patient overview"
+	},
+	"showScroller": true,
+	"width": 1000
+}

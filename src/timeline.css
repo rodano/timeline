@@ -1,0 +1,130 @@
+/* global */
+.timeline text {
+	font-size: 12px;
+	user-select: none;
+}
+.timeline a {
+	text-decoration: none;
+}
+/* buttons */
+.timeline .button {
+	cursor: pointer;
+}
+.timeline .button > rect {
+	stroke: #ccc;
+	fill: white;
+}
+/* legends */
+.timeline .legends > g {
+	pointer-events: bounding-box; /* consider pointer events over the whole shape of groups, even over "empty" space */
+}
+/* periods */
+.timeline .periods > g {
+	cursor: pointer;
+}
+.timeline .periods > g.selected {
+	cursor: auto;
+}
+.timeline .periods > g > rect {
+	stroke: #ccc;
+	fill: white;
+}
+.timeline .periods > g.selected > rect {
+	fill: #ccc;
+}
+/* error */
+.timeline .error_frame {
+	fill: #eee;
+	opacity: 0.8;
+}
+/* graphs */
+.timeline .frame {
+	fill: white;
+	stroke: black;
+	stroke-width: 0.5px;
+	cursor: grab;
+}
+.timeline .frame.scrolling {
+	cursor: grabbing;
+}
+.timeline .selection {
+	fill: #7cb5ec;
+	opacity: 0.5;
+}
+.timeline .grading {
+	stroke: #ccc;
+}
+.timeline .grading_label {
+	font-size: 10px;
+	text-rendering: optimizeLegibility;
+}
+.timeline .grid {
+	stroke: #eee;
+	z-index: -1;
+}
+.timeline .grid_label {
+	font-weight: bold;
+	font-size: 30px;
+	color: #eee;
+	opacity: 0.05;
+}
+/* scroller */
+.timeline .scroller_frame {
+	fill: #bbb;
+	stroke: black;
+	stroke-width: 0.5px;
+}
+.timeline .scroller_grading_label {
+	font-size: 16px;
+	fill: #ccc;
+	text-rendering: optimizeLegibility;
+}
+.timeline .scroller_handle {
+	shape-rendering: optimizeSpeed;
+}
+.timeline g > .scroller {
+	opacity: 0;
+}
+.timeline .scroller {
+	cursor: grab;
+}
+.timeline .scroller.scrolling {
+	cursor: grabbing;
+}
+/* tooltip */
+.timeline .tooltip {
+	display: none;
+}
+.timeline .tooltip rect {
+	opacity: 0.9;
+	fill: white;
+	stroke-width: 2px;
+}
+.timeline .tooltip text {
+	fill: black;
+}
+.timeline .tooltip text.title {
+	font-weight: bold;
+}
+/* values */
+.timeline .value_period {
+	font-size: 11px;
+	color: white;
+}
+.timeline .value_line line {
+	stroke-width: 1px;
+}
+.timeline .value_line circle {
+	stroke-width: 1px;
+}
+/* area */
+.timeline .area {
+	opacity: 0;
+}
+/* outline */
+.timeline .outline {
+	cursor: pointer;
+}
+.timeline .outline:hover * {
+	stroke-width: 2px;
+}

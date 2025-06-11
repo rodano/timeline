@@ -1,0 +1,37 @@
+{
+	"name": "@rodano/timeline",
+	"description": "Display time-related events in a nice graph",
+	"version": "2.10.0",
+	"scripts": {
+		"lint": "eslint .",
+		"tsc": "tsc",
+		"start": "webpack serve",
+		"build": "webpack"
+	},
+	"type": "module",
+	"browser": "src/timeline.js",
+	"types": "src/timeline.d.ts",
+	"files": [
+		"src"
+	],
+	"license": "AGPL-3.0-only",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rodano/timeline.git"
+	},
+	"dependencies": {
+		"@matco/basic-tools": "^2.4.4"
+	},
+	"devDependencies": {
+		"copy-webpack-plugin": "13.0.0",
+		"css-loader": "7.1.2",
+		"eslint": "8.57.0",
+		"finalhandler": "2.1.0",
+		"html-webpack-plugin": "5.6.3",
+		"style-loader": "4.0.0",
+		"typescript": "5.8.3",
+		"webpack": "5.99.9",
+		"webpack-cli": "6.0.1",
+		"webpack-dev-server": "5.2.2"
+	}
+}

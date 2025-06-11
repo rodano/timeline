@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"moduleResolution": "node",
+		"target": "ESNext",
+		"module": "ESNext",
+		"noEmit": true,
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+		"webpack.config.js"
+	]
+}
