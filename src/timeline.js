@@ -9,6 +9,13 @@ import {GraphType} from './graph_type.js';
 import {TimeUnit, TimeUnits} from './time.js';
 import {Section} from './section.js';
 
+/**
+ * Convert a timeframe into an amount expressed in the given time unit.
+ * @param {Timeframe} timeframe - Timeframe to measure.
+ * @param {TimeUnit} unit - Time unit to express the amount in.
+ * @returns {number} Amount of time in the requested unit.
+ * @throws {Error} When the unit is not supported.
+ */
 function get_timeframe_amount(timeframe, unit) {
 	switch(unit) {
 		case TimeUnit.YEARS:
@@ -29,6 +36,12 @@ function get_timeframe_amount(timeframe, unit) {
 	throw new Error(`Unit ${unit.name} is not supported`);
 }
 
+/**
+ * Compute the smallest timeframe covering every value of the given sections.
+ * @param {Section[]} sections - Sections to inspect.
+ * @returns {Timeframe} A timeframe spanning all values across the sections.
+ * @throws {Error} When no data is available to derive the timeframe.
+ */
 function get_time_frame_for_sections(sections) {
 	let start_date;
 	let stop_date;
@@ -53,11 +66,11 @@ function get_time_frame_for_sections(sections) {
 }
 
 /**
- *
- * @param {*} unit The time unit used to perform the calculation
- * @param {*} amount The amount of time of this unit
- * @param {*} slots The number of available slots
- * @returns
+ * Pick the largest "interesting" interval of the given unit that fits the number of slots.
+ * @param {TimeUnit} unit - The time unit used to perform the calculation.
+ * @param {number} amount - The amount of time of this unit.
+ * @param {number} slots - The number of available slots.
+ * @returns {number | undefined} The chosen interval, or undefined when even the coarsest one does not fit.
  */
 function get_unit_interval(unit, amount, slots) {
 	//sort unit interests from biggest to smallest to find the smallest interesting interest
@@ -76,6 +89,12 @@ function get_unit_interval(unit, amount, slots) {
 	return interests[i - 1];
 }
 
+/**
+ * Build a map of chosen intervals for every time unit within the given timeframe.
+ * @param {Timeframe} timeframe - Timeframe to inspect.
+ * @param {number} slots - Available number of graduation slots.
+ * @returns {{[key: string]: number | undefined}} Map of unit name to selected interval.
+ */
 function get_unit_intervals(timeframe, slots) {
 	const entries = [...TimeUnits].reverse()
 		.map(unit => {
@@ -85,10 +104,21 @@ function get_unit_intervals(timeframe, slots) {
 	return Object.fromEntries(entries);
 }
 
+/**
+ * Tell whether a section has no vertical position configured.
+ * @param {Section} section - Section to inspect.
+ * @returns {boolean} True when the section has no numeric start position.
+ */
 function is_position_undefined(section) {
 	return !Number.isNumber(section?.position?.start);
 }
 
+/**
+ * Comparator sorting sections by descending start position and falling back to id ordering.
+ * @param {Section} section_1 - First section.
+ * @param {Section} section_2 - Second section.
+ * @returns {number} Standard comparator result.
+ */
 function section_comparator(section_1, section_2) {
 	if(is_position_undefined(section_1) && is_position_undefined(section_2)) {
 		return section_1.id.compareTo(section_2.id);
@@ -116,6 +146,11 @@ const TIME_MARGIN_PERCENTAGE = 10;
 //arbitrary time frame when only a single date is displayed
 const SINGLE_DATE_EXTENSION_SECONDS = 30;
 
+/**
+ * Extend a timeframe with a percentage of visual margin, handling zero-length timeframes.
+ * @param {Timeframe} t - Timeframe to clone and extend.
+ * @returns {Timeframe} A new, extended timeframe.
+ */
 function add_margin(t) {
 	const timeframe = t.clone().extendPercentage(TIME_MARGIN_PERCENTAGE);
 	//if the timeframe is limited to a single date, extends the timeframe by an arbitrary amount
@@ -126,6 +161,13 @@ function add_margin(t) {
 }
 
 export class Timeline {
+	/**
+	 * Build a new Timeline attached to a DOM container.
+	 * @param {HTMLElement} container - Host element for the SVG graph.
+	 * @param {object} config - Timeline configuration object.
+	 * @param {string} [locale] - BCP 47 locale tag used to render labels.
+	 * @throws {Error} When the configuration is not a valid object.
+	 */
 	constructor(container, config, locale) {
 		if(!Object.isObject(config)) {
 			throw new Error('Configuration parameter must be an object');
@@ -224,18 +266,36 @@ export class Timeline {
 		this.init();
 	}
 
+	/**
+	 * Initialize every section (resolves references, etc.).
+	 * @returns {void}
+	 */
 	init() {
 		this.sections.forEach(s => s.init());
 	}
 
+	/**
+	 * Prefix a raw id with the timeline's unique UUID to produce a globally unique id.
+	 * @param {string} id - Raw id.
+	 * @returns {string} A unique id namespaced to this timeline.
+	 */
 	generateId(id) {
 		return `${this.uuid}_${id}`;
 	}
 
+	/**
+	 * Look up a section by id.
+	 * @param {string} section_id - Section identifier.
+	 * @returns {Section | undefined} The section, or undefined when not found.
+	 */
 	getSection(section_id) {
 		return this.sections.find(s => s.id === section_id);
 	}
 
+	/**
+	 * Export the current timeline as a PNG image and trigger a browser download.
+	 * @returns {void}
+	 */
 	download() {
 		//duplicate svg to be able to add custom styling
 		const cloned_svg = /**@type {SVGElement}*/ (this.svg.cloneNode(true));
@@ -286,6 +346,10 @@ export class Timeline {
 		//cloned svg can now be removed from the DOM
 		this.container.removeChild(cloned_svg);
 
+		/**
+		 * Trigger a browser download for the generated image blob.
+		 * @param {Blob} blob - Generated image blob.
+		 */
 		function blob_generated(blob) {
 			const filename = 'timeline.png';
 			const file = new File([blob], filename, {type: 'image/octet-stream', lastModified: Date.now()});
@@ -317,6 +381,11 @@ export class Timeline {
 		image.src = svg_url;
 	}
 
+	/**
+	 * Return the mouse coordinates of the given event relative to the SVG canvas.
+	 * @param {MouseEvent & TouchEvent} event - Mouse or touch DOM event.
+	 * @returns {[number, number]} Tuple of x and y coordinates.
+	 */
 	getMousePosition(event) {
 		//retrieve position of the event and the graph relative to the viewport
 		const event_x = event.touches ? event.touches[0].clientX : event.clientX;
@@ -325,7 +394,11 @@ export class Timeline {
 		return [event_x - position.left, event_y - position.top];
 	}
 
-	//update tooltip size and position
+	/**
+	 * Position the currently visible tooltip near the mouse cursor.
+	 * @param {MouseEvent & TouchEvent} event - Mouse or touch DOM event.
+	 * @returns {void}
+	 */
 	updateTooltip(event) {
 		//show to initialize bbox
 		this.tooltip.style.display = 'block';
@@ -340,10 +413,18 @@ export class Timeline {
 		this.tooltip.setAttributeNS(null, 'transform', `translate(${x_position} ${coordinate_y + 15})`);
 	}
 
+	/**
+	 * Hide the currently displayed tooltip, if any.
+	 * @returns {void}
+	 */
 	hideTooltip() {
 		this.tooltip.style.display = 'none';
 	}
 
+	/**
+	 * Remove the existing SVG and re-render the whole graph.
+	 * @returns {void}
+	 */
 	redraw() {
 		//remove existing svg to reset the size of the container
 		//otherwise, container will keep its size because the svg inside has its size enforced
@@ -351,6 +432,10 @@ export class Timeline {
 		this.draw();
 	}
 
+	/**
+	 * Build the SVG hierarchy for the timeline and wire up user interactions.
+	 * @returns {void}
+	 */
 	draw() {
 		const that = this;
 
@@ -517,6 +602,11 @@ export class Timeline {
 		let graph_handle_x;
 		let timeframe;
 		let selection;
+
+		/**
+		 * Begin a drag or ctrl-selection interaction on the graphs frame.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function start_drag(event) {
 			event.stopPropagation();
 			graph_handle_x = (event.touches ? event.touches[0].clientX : event.clientX) - that.frame.getBoundingClientRect().x;
@@ -534,6 +624,10 @@ export class Timeline {
 			document.addEventListener('touchmove', move, {passive: true});
 		}
 
+		/**
+		 * Update the drag selection rectangle or shift the visible timeframe.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function move(event) {
 			event.stopPropagation();
 			const event_x = (event.touches ? event.touches[0].clientX : event.clientX) - that.frame.getBoundingClientRect().x;
@@ -554,6 +648,8 @@ export class Timeline {
 		}
 
 		/**
+		 * End the current drag or selection interaction and apply the resulting timeframe.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
 		 * @this {Document}
 		 */
 		function stop_drag(event) {
@@ -602,7 +698,10 @@ export class Timeline {
 		this.svg.appendChild(this.errorFrame);
 
 		//legends
+
 		/**
+		 * Toggle visibility of a section when its legend is clicked.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
 		 * @this {SVGElement}
 		 */
 		function manage_toggle_section(event) {
@@ -626,6 +725,8 @@ export class Timeline {
 		}
 
 		/**
+		 * Toggle visibility of a section's references when its legend is clicked.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
 		 * @this {SVGElement}
 		 */
 		function manage_toggle_reference(event) {
@@ -766,6 +867,11 @@ export class Timeline {
 		let scroller_handle_x;
 
 		//handle listeners
+
+		/**
+		 * Begin resizing the scale scroller (either from the left or right handle).
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function start_move_scale_scroller(event) {
 			event.stopPropagation();
 			document.addEventListener('mouseup', stop_move_scale_scroller, {once: true, passive: true});
@@ -774,18 +880,30 @@ export class Timeline {
 			that.scrollerSelector.style.cursor = 'e-resize';
 		}
 
+		/**
+		 * Begin resizing the scale scroller from its left handle.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function start_move_scale_scroller_left(event) {
 			start_move_scale_scroller(event);
 			document.addEventListener('mousemove', move_scale_scroller_left);
 			document.addEventListener('touchmove', move_scale_scroller_left);
 		}
 
+		/**
+		 * Begin resizing the scale scroller from its right handle.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function start_move_scale_scroller_right(event) {
 			start_move_scale_scroller(event);
 			document.addEventListener('mousemove', move_scale_scroller_right);
 			document.addEventListener('touchmove', move_scale_scroller_right);
 		}
 
+		/**
+		 * Update the drag selection rectangle or shift the visible timeframe.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function move_scale_scroller_left(event) {
 			event.stopPropagation();
 			let [coordinate_x] = that.getMousePosition(event);
@@ -801,6 +919,10 @@ export class Timeline {
 			that.scrollerLeftHandle.setAttribute('transform', `translate(${coordinate_x - 3})`);
 		}
 
+		/**
+		 * Update the drag selection rectangle or shift the visible timeframe.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function move_scale_scroller_right(event) {
 			event.stopPropagation();
 			let [coordinate_x] = that.getMousePosition(event);
@@ -815,6 +937,10 @@ export class Timeline {
 			that.scrollerRightHandle.setAttribute('transform', `translate(${coordinate_x - 3})`);
 		}
 
+		/**
+		 * End the scale scroller resize interaction and update the visible period.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function stop_move_scale_scroller(event) {
 			event.stopPropagation();
 			document.removeEventListener('mousemove', move_scale_scroller_right);
@@ -833,6 +959,11 @@ export class Timeline {
 		}
 
 		//scroller listeners
+
+		/**
+		 * Begin translating the scroller selector along the timeline.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function start_move_scroller(event) {
 			event.stopPropagation();
 			scroller_handle_x = event.touches ? event.touches[0].pageX - that.config.legendWidth : event.clientX;
@@ -844,6 +975,10 @@ export class Timeline {
 			that.scrollerSelector.setAttributeNS(null, 'class', 'scroller scrolling');
 		}
 
+		/**
+		 * Update the drag selection rectangle or shift the visible timeframe.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function move_scroller(event) {
 			event.stopPropagation();
 			let event_x = event.touches ? event.touches[0].pageX - that.config.legendWidth : event.clientX;
@@ -856,6 +991,10 @@ export class Timeline {
 			that.setPeriod(that.state.visible.timeframe.clone().shiftStartDate(start_date));
 		}
 
+		/**
+		 * End the scroller translation interaction.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
+		 */
 		function stop_move_scroller(event) {
 			event.stopPropagation();
 			that.scrollerSelector.setAttributeNS(null, 'class', 'scroller');
@@ -959,6 +1098,11 @@ export class Timeline {
 		this.svg.appendChild(this.tooltip);
 
 		//generic tooltip
+
+		/**
+		 * Attach mouse tooltip listeners to a legend element (skipped on touch devices).
+		 * @param {SVGElement} legend - Legend group element.
+		 */
 		function hook_tooltip(legend) {
 			//do not display legend tooltips on touch devices
 			const touch = window.matchMedia('(pointer:coarse)');
@@ -969,6 +1113,8 @@ export class Timeline {
 		}
 
 		/**
+		 * Populate and display the shared tooltip for a legend element.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
 		 * @this {SVGElement}
 		 */
 		function show_tooltip(event) {
@@ -984,6 +1130,11 @@ export class Timeline {
 		this.setPeriod(period.timeframe);
 	}
 
+	/**
+	 * Adjust a period so it fits within the total data timeframe and enforces a minimum length.
+	 * @param {Timeframe} p - Candidate period.
+	 * @returns {Timeframe} A new constrained period.
+	 */
 	constrainPeriodToData(p) {
 		//do not touch parameter (date and timeframe are mutable)
 		const period = p.clone();
@@ -1008,6 +1159,11 @@ export class Timeline {
 		return period;
 	}
 
+	/**
+	 * Change the currently visible period and redraw axes and graphs accordingly.
+	 * @param {Timeframe} p - New visible period.
+	 * @returns {void}
+	 */
 	setPeriod(p) {
 		const period = this.constrainPeriodToData(p);
 
@@ -1061,24 +1217,48 @@ export class Timeline {
 		}
 	}
 
+	/**
+	 * Convert a date into its horizontal pixel position inside the scroller.
+	 * @param {Date} date - Date to project.
+	 * @returns {number} Horizontal position in pixels.
+	 */
 	getScrollerPosition(date) {
 		const translation = Date.getDifferenceInMilliseconds(this.state.data.timeframe.startDate, date);
 		return translation * this.state.data.scale;
 	}
 
+	/**
+	 * Convert a duration (in milliseconds) into a pixel width inside the scroller.
+	 * @param {number} duration - Duration in milliseconds.
+	 * @returns {number} Width in pixels.
+	 */
 	getScrollerWidth(duration) {
 		return this.state.data.scale * duration;
 	}
 
+	/**
+	 * Convert a date into its horizontal pixel position inside the main graph area.
+	 * @param {Date} date - Date to project.
+	 * @returns {number} Horizontal position in pixels.
+	 */
 	getGraphPosition(date) {
 		const translation = Date.getDifferenceInMilliseconds(this.state.visible.timeframe.startDate, date);
 		return translation * this.state.visible.scale;
 	}
 
+	/**
+	 * Convert a duration (in milliseconds) into a pixel width inside the main graph area.
+	 * @param {number} duration - Duration in milliseconds.
+	 * @returns {number} Width in pixels.
+	 */
 	getGraphWidth(duration) {
 		return this.state.visible.scale * duration;
 	}
 
+	/**
+	 * Render the x-axis (horizontal time axis) graduations and labels.
+	 * @returns {void}
+	 */
 	drawXaxis() {
 		this.xaxisSubcontainer.empty();
 
@@ -1113,6 +1293,10 @@ export class Timeline {
 		}
 	}
 
+	/**
+	 * Render the y-axis (vertical scale) graduations for every scaled section.
+	 * @returns {void}
+	 */
 	drawYaxis() {
 		this.yaxisContainer.empty();
 
@@ -1174,10 +1358,16 @@ export class Timeline {
 			});
 	}
 
+	/**
+	 * Render every section's graph inside the graphs container.
+	 * @returns {void}
+	 */
 	drawGraphs() {
 		const that = this;
 
 		/**
+		 * Populate and display the shared tooltip for a data value hovered over.
+		 * @param {MouseEvent & TouchEvent} event - DOM event (mouse or touch).
 		 * @this {SVGElement}
 		 */
 		function show_tooltip(event) {
@@ -1233,14 +1423,22 @@ export class Timeline {
 			that.updateTooltip(event);
 		}
 
+		/**
+		 * Attach mouse tooltip listeners to a data-value SVG element.
+		 * @param {SVGElement} element - SVG element to hook the tooltip on.
+		 * @param {Section} section - Section owning the value.
+		 * @param {number | undefined} reference_index - Index of the reference in the section, or undefined for a plain value.
+		 * @param {number} value_index - Index of the value within the section or reference.
+		 * @param {string} [color] - Tooltip stroke color.
+		 */
 		function hook_tooltip(element, section, reference_index, value_index, color) {
 			//hook only if there is a tooltip to hook
 			const tooltip_text = reference_index ? section.references[reference_index].getLocalizedTooltip() : section.getLocalizedTooltip();
 			if(tooltip_text) {
 				//attach tooltip to element
 				element.setAttributeNS(null, 'data-section-id', section.id);
-				element.setAttributeNS(null, 'data-reference-index', reference_index === undefined ? '' : reference_index);
-				element.setAttributeNS(null, 'data-value-index', value_index);
+				element.setAttributeNS(null, 'data-reference-index', reference_index === undefined ? '' : reference_index.toString());
+				element.setAttributeNS(null, 'data-value-index', value_index.toString());
 				element.setAttributeNS(null, 'data-color', color);
 				element.addEventListener('mousemove', show_tooltip);
 				element.addEventListener('mouseout', () => that.hideTooltip());
@@ -1514,6 +1712,11 @@ export class Timeline {
 			});
 	}
 
+	/**
+	 * Return a UI label localized for the timeline's current locale.
+	 * @param {string} string - Label key.
+	 * @returns {string} The localized label.
+	 */
 	getLabel(string) {
 		return GetLabel(string, this.locale);
 	}

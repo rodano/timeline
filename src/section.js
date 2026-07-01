@@ -3,15 +3,33 @@ import {Reference} from './reference.js';
 import {GraphType} from './graph_type.js';
 import {ValueSymbol} from './value_symbol.js';
 
+/**
+ * Compare two values so they can be sorted in reverse chronological order.
+ * @param {{date: Date}} value_1 - First value.
+ * @param {{date: Date}} value_2 - Second value.
+ * @returns {number} Standard comparator result (negative, zero or positive).
+ */
 function value_comparator(value_1, value_2) {
 	return value_2.date.compareTo(value_1.date);
 }
 
+/**
+ * A logical row of the timeline holding a series of values, references and
+ * rendering properties (color, symbol, scale, etc.).
+ */
 export class Section {
 	timeline;
 	values = [];
 	references = [];
+	hidden = false;
+	referencesHidden = false;
 
+	/**
+	 * Build a Section from a raw configuration object.
+	 * @param {object} timeline - Owning timeline.
+	 * @param {object} config - Raw section configuration object.
+	 * @throws {Error} When the scale is invalid or a value has an invalid date.
+	 */
 	constructor(timeline, config) {
 		this.timeline = timeline;
 
@@ -99,26 +117,46 @@ export class Section {
 		this.references = (config.references || []).map(r => new Reference(this, r));
 	}
 
+	/**
+	 * Initialize all references attached to this section (resolves reference dates).
+	 * @returns {void}
+	 */
 	init() {
 		this.references.forEach(r => r.init());
 	}
 
+	/**
+	 * Return the section label localized for the timeline's current locale.
+	 * @returns {string} Localized label.
+	 */
 	getLocalizedLabel() {
 		//labels in configuration have only the first part of the locale
 		const language = this.timeline.locale.substring(0, 2);
 		return this.label[language];
 	}
 
+	/**
+	 * Return the section tooltip localized for the timeline's current locale.
+	 * @returns {string} Localized tooltip text, or an empty string when no tooltip is defined.
+	 */
 	getLocalizedTooltip() {
 		//labels in configuration have only the first part of the locale
 		const language = this.timeline.locale.substring(0, 2);
 		return this.tooltip ? this.tooltip[language] : '';
 	}
 
+	/**
+	 * Compute the vertical offset in pixels at which the section should be drawn.
+	 * @returns {number} Vertical offset from the top of the graphs area.
+	 */
 	getOffset() {
 		return this.position ? this.timeline.graphsHeight * (1 - this.position.stop / 100) : 0;
 	}
 
+	/**
+	 * Compute the pixel height allocated to this section within the graphs area.
+	 * @returns {number} Height in pixels.
+	 */
 	getHeight() {
 		return this.position ? this.timeline.graphsHeight * (this.position.stop - this.position.start) / 100 : this.timeline.graphsHeight;
 	}

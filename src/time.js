@@ -1,13 +1,31 @@
+/**
+ * Enumeration of time units used by the timeline. Each entry describes how to
+ * snap a Date back to the previous "interesting" boundary for that unit.
+ */
 const TimeUnit = {
 	YEARS: {
 		name: 'YEARS',
+		start: 0,
 		interests: [50, 20, 10, 5, 2, 1],
+
+		/**
+		 * Snap the given date back to the start of its year.
+		 * @param {Date} date - Reference date.
+		 * @returns {Date} A new date snapped to the previous year boundary.
+		 */
 		previous_interesting: date => reset_fields(date, TimeUnit.YEARS)
 	},
 	MONTHS: {
 		name: 'MONTHS',
 		start: 0,
 		interests: [12, 6, 3, 2, 1],
+
+		/**
+		 * Snap the given date back to the previous month boundary matching the interest.
+		 * @param {Date} d - Reference date.
+		 * @param {number} interest - Interval in months to snap to.
+		 * @returns {Date} A new snapped date.
+		 */
 		previous_interesting: (d, interest) => {
 			const date = reset_fields(d, TimeUnit.MONTHS);
 			while(date.getUTCMonth() % interest !== 0) {
@@ -20,6 +38,13 @@ const TimeUnit = {
 		name: 'DAYS',
 		start: 1,
 		interests: [14, 7, 2, 1],
+
+		/**
+		 * Snap the given date back to the previous day boundary matching the interest.
+		 * @param {Date} d - Reference date.
+		 * @param {number} interest - Interval in days to snap to.
+		 * @returns {Date} A new snapped date.
+		 */
 		previous_interesting: (d, interest) => {
 			const date = reset_fields(d, TimeUnit.DAYS);
 			while(date.getUTCDate() % interest !== 0) {
@@ -32,6 +57,13 @@ const TimeUnit = {
 		name: 'HOURS',
 		start: 0,
 		interests: [12, 6, 3, 2, 1],
+
+		/**
+		 * Snap the given date back to the previous hour boundary matching the interest.
+		 * @param {Date} d - Reference date.
+		 * @param {number} interest - Interval in hours to snap to.
+		 * @returns {Date} A new snapped date.
+		 */
 		previous_interesting: (d, interest) => {
 			const date = reset_fields(d, TimeUnit.HOURS);
 			while(date.getUTCHours() % interest !== 0) {
@@ -44,6 +76,13 @@ const TimeUnit = {
 		name: 'MINUTES',
 		start: 0,
 		interests: [60, 30, 15, 5, 1],
+
+		/**
+		 * Snap the given date back to the previous minute boundary matching the interest.
+		 * @param {Date} d - Reference date.
+		 * @param {number} interest - Interval in minutes to snap to.
+		 * @returns {Date} A new snapped date.
+		 */
 		previous_interesting: (d, interest) => {
 			const date = reset_fields(d, TimeUnit.MINUTES);
 			while(date.getUTCMinutes() % interest !== 0) {
@@ -56,6 +95,13 @@ const TimeUnit = {
 		name: 'SECONDS',
 		start: 0,
 		interests: [60, 30, 15, 5, 1],
+
+		/**
+		 * Snap the given date back to the previous second boundary matching the interest.
+		 * @param {Date} d - Reference date.
+		 * @param {number} interest - Interval in seconds to snap to.
+		 * @returns {Date} A new snapped date.
+		 */
 		previous_interesting: (d, interest) => {
 			const date = d.clone();
 			while(date.getUTCSeconds() % interest !== 0) {
@@ -68,6 +114,13 @@ const TimeUnit = {
 		name: 'MILLISECONDS',
 		start: 0,
 		interests: [1000, 500, 200, 150, 100, 50, 10, 1],
+
+		/**
+		 * Snap the given date back to the previous millisecond boundary matching the interest.
+		 * @param {Date} d - Reference date.
+		 * @param {number} interest - Interval in milliseconds to snap to.
+		 * @returns {Date} A new snapped date.
+		 */
 		previous_interesting: (d, interest) => {
 			const date = d.clone();
 			while(date.getUTCMilliseconds() % interest !== 0) {
@@ -78,8 +131,15 @@ const TimeUnit = {
 	}
 };
 
+/**Ordered list of time units, from coarsest (YEARS) to finest (MILLISECONDS). */
 const TimeUnits = [TimeUnit.YEARS, TimeUnit.MONTHS, TimeUnit.DAYS, TimeUnit.HOURS, TimeUnit.MINUTES, TimeUnit.SECONDS, TimeUnit.MILLISECONDS];
 
+/**
+ * Zero out every date field finer than the given unit, returning a new Date.
+ * @param {Date} date - Source date (not mutated).
+ * @param {object} until_unit - Time unit down to which fields are preserved.
+ * @returns {Date} A cloned date with finer-grained fields reset to their default value.
+ */
 function reset_fields(date, until_unit) {
 	const reset_date = date.clone();
 	for(let i = TimeUnits.length - 1; i >= 0; i--) {
@@ -92,6 +152,12 @@ function reset_fields(date, until_unit) {
 	return reset_date;
 }
 
+/**
+ * Return the UTC field value corresponding to the given time unit.
+ * @param {object} unit - Target time unit.
+ * @returns {number} The UTC value for the requested unit.
+ * @throws {Error} When the unit is not supported.
+ */
 Date.prototype.getUnitValue = function(unit) {
 	switch(unit) {
 		case TimeUnit.YEARS:
@@ -112,6 +178,12 @@ Date.prototype.getUnitValue = function(unit) {
 	throw new Error(`Unit ${unit.name} is not supported`);
 };
 
+/**
+ * Return a short, human-readable label for the given time unit value.
+ * @param {object} unit - Target time unit.
+ * @param {string} locale - Locale used for month formatting.
+ * @returns {string} A localized short label.
+ */
 Date.prototype.getUnitValueLabel = function(unit, locale) {
 	const value = this.getUnitValue(unit);
 	switch(unit) {
@@ -130,6 +202,12 @@ Date.prototype.getUnitValueLabel = function(unit, locale) {
 	}
 };
 
+/**
+ * Return a longer, human-readable label for the given time unit value.
+ * @param {object} unit - Target time unit.
+ * @param {string} locale - Locale used for month formatting.
+ * @returns {string} A localized long label.
+ */
 Date.prototype.getFullUnitValueLabel = function(unit, locale) {
 	const value = this.getUnitValue(unit);
 	switch(unit) {
@@ -148,6 +226,11 @@ Date.prototype.getFullUnitValueLabel = function(unit, locale) {
 	}
 };
 
+/**
+ * Format the date as a UTC ISO-like string truncated at the given unit.
+ * @param {object} unit - Finest unit to include in the output.
+ * @returns {string} Formatted UTC date string.
+ */
 Date.prototype.toUTCUnitDisplay = function(unit) {
 	let label = this.getUTCFullYear().toString();
 	if(TimeUnits.indexOf(unit) >= TimeUnits.indexOf(TimeUnit.MONTHS)) {
@@ -172,6 +255,13 @@ Date.prototype.toUTCUnitDisplay = function(unit) {
 	return label;
 };
 
+/**
+ * Set the UTC field of this date corresponding to the given time unit.
+ * @param {object} unit - Target time unit.
+ * @param {number} value - New value for the field.
+ * @returns {number} The result of the underlying set* call (updated timestamp).
+ * @throws {Error} When the unit is not supported.
+ */
 Date.prototype.setUnitValue = function(unit, value) {
 	switch(unit) {
 		case TimeUnit.YEARS:
@@ -192,6 +282,13 @@ Date.prototype.setUnitValue = function(unit, value) {
 	throw new Error(`Unit ${unit.name} is not supported`);
 };
 
+/**
+ * Add a duration expressed as a number of units to this date.
+ * @param {object} unit - Unit of the duration to add.
+ * @param {number} value - Amount of units to add.
+ * @returns {Date} The mutated date (as returned by the underlying add* helper).
+ * @throws {Error} When the unit is not supported.
+ */
 Date.prototype.addDuration = function(unit, value) {
 	switch(unit) {
 		case TimeUnit.YEARS:

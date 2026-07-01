@@ -1,5 +1,6 @@
 import {defineConfig} from 'eslint/config';
 import js from '@eslint/js';
+import jsdoc from 'eslint-plugin-jsdoc';
 import stylistic from '@stylistic/eslint-plugin';
 import globals from 'globals';
 
@@ -12,7 +13,8 @@ export default defineConfig([
 			}
 		},
 		plugins: {
-			'@stylistic': stylistic
+			'@stylistic': stylistic,
+			'jsdoc': jsdoc
 		},
 		linterOptions: {
 			reportUnusedDisableDirectives: 'error',
@@ -73,7 +75,25 @@ export default defineConfig([
 			'@stylistic/quotes': ['error', 'single'],
 			'@stylistic/semi': ['error', 'always', {omitLastInOneLineBlock: false}],
 			'@stylistic/space-before-function-paren': ['error', 'never'],
-			'@stylistic/spaced-comment': ['error', 'never']
+			'@stylistic/spaced-comment': ['error', 'never'],
+			//jsdoc rules
+			...jsdoc.configs['flat/recommended'].rules,
+			'jsdoc/check-indentation': 'warn',
+			'jsdoc/check-line-alignment': 'warn',
+			'jsdoc/check-syntax': 'warn',
+			'jsdoc/imports-as-dependencies': 'warn',
+			'jsdoc/lines-before-block': 'warn',
+			'jsdoc/no-bad-blocks': 'warn',
+			'jsdoc/no-blank-block-descriptions': 'error',
+			'jsdoc/require-asterisk-prefix': 'warn',
+			'jsdoc/require-description': 'warn',
+			'jsdoc/require-hyphen-before-param-description': 'error',
+			'jsdoc/require-next-description': 'warn',
+			'jsdoc/require-throws': 'warn',
+			'jsdoc/require-throws-description': 'warn',
+			'jsdoc/require-yields-description': 'warn',
+			'jsdoc/sort-tags': 'warn',
+			'jsdoc/type-formatting': 'warn'
 		}
 	}
 ]);

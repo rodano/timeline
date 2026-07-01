@@ -23,10 +23,21 @@ const LABELS = {
 };
 
 
+/**
+ * Return the given locale if supported, otherwise fall back to the default locale.
+ * @param {string | undefined} locale - Candidate locale (BCP 47 tag).
+ * @returns {string} A supported locale identifier.
+ */
 export function LocaleOrDefault(locale) {
 	return locale && AVAILABLE_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
 }
 
+/**
+ * Look up a UI label for the given key and locale, falling back to the default locale.
+ * @param {string} string - Label key to translate.
+ * @param {string} locale - Locale to look the label up for.
+ * @returns {string} The translated label, or the default locale label as fallback.
+ */
 export function GetLabel(string, locale) {
 	const label = LABELS[locale][string];
 	if(label) {

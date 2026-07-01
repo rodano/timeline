@@ -1,5 +1,10 @@
 import {Timeline} from '../src/timeline.js';
 
+/**
+ * Fetch a JSON configuration file and return its parsed contents.
+ * @param {string} config - URL of the JSON configuration file.
+ * @returns {Promise<object>} The parsed configuration.
+ */
 async function load(config) {
 	const response = await fetch(config);
 	return await response.json();
