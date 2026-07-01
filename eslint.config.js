@@ -42,7 +42,7 @@ export default defineConfig([
 			'no-prototype-builtins': 'off', //default possible problem, but disabled
 			'no-unmodified-loop-condition': 'error', //possible problem
 			'no-unreachable-loop': 'error', //possible problem
-			'no-use-before-define': 'off', //possible problem
+			'no-use-before-define': ['error', {functions: false, classes: true, variables: true}], //possible problem (allow hoisted function declarations)
 			'no-useless-assignment': 'error', //possible problem
 			'no-self-compare': 'error', //possible problem
 			'no-template-curly-in-string': 'error', //possible problem
