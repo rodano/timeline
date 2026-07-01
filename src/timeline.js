@@ -553,6 +553,9 @@ export class Timeline {
 			}
 		}
 
+		/**
+		 * @this {Document}
+		 */
 		function stop_drag(event) {
 			event.stopPropagation();
 			if(selection) {
@@ -599,6 +602,9 @@ export class Timeline {
 		this.svg.appendChild(this.errorFrame);
 
 		//legends
+		/**
+		 * @this {SVGElement}
+		 */
 		function manage_toggle_section(event) {
 			event.stop();
 			that.errorFrame.style.display = 'none';
@@ -619,6 +625,9 @@ export class Timeline {
 			that.drawGraphs();
 		}
 
+		/**
+		 * @this {SVGElement}
+		 */
 		function manage_toggle_reference(event) {
 			event.stop();
 			that.errorFrame.style.display = 'none';
@@ -959,6 +968,9 @@ export class Timeline {
 			}
 		}
 
+		/**
+		 * @this {SVGElement}
+		 */
 		function show_tooltip(event) {
 			//update tooltip container content
 			that.tooltip.lastChild.empty();
@@ -1165,6 +1177,9 @@ export class Timeline {
 	drawGraphs() {
 		const that = this;
 
+		/**
+		 * @this {SVGElement}
+		 */
 		function show_tooltip(event) {
 			const section_id = this.getAttributeNS(null, 'data-section-id');
 			const reference_index = this.getAttributeNS(null, 'data-reference-index');
