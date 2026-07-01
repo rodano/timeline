@@ -10,7 +10,7 @@ export class Reference {
 	/**
 	 * Build a Reference from a raw configuration object.
 	 * @param {object} section - Owning section.
-	 * @param {object} config - Raw reference configuration object.
+	 * @param {import("./types.js").ReferenceConfig} config - Raw reference configuration object.
 	 */
 	constructor(section, config) {
 		this.section = section;

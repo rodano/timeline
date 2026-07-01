@@ -12,7 +12,7 @@ import {Section} from './section.js';
 /**
  * Convert a timeframe into an amount expressed in the given time unit.
  * @param {Timeframe} timeframe - Timeframe to measure.
- * @param {TimeUnit} unit - Time unit to express the amount in.
+ * @param {import("./time.js").TimeUnitDefinition} unit - Time unit to express the amount in.
  * @returns {number} Amount of time in the requested unit.
  * @throws {Error} When the unit is not supported.
  */
@@ -67,7 +67,7 @@ function get_time_frame_for_sections(sections) {
 
 /**
  * Pick the largest "interesting" interval of the given unit that fits the number of slots.
- * @param {TimeUnit} unit - The time unit used to perform the calculation.
+ * @param {import("./time.js").TimeUnitDefinition} unit - The time unit used to perform the calculation.
  * @param {number} amount - The amount of time of this unit.
  * @param {number} slots - The number of available slots.
  * @returns {number | undefined} The chosen interval, or undefined when even the coarsest one does not fit.
@@ -164,7 +164,7 @@ export class Timeline {
 	/**
 	 * Build a new Timeline attached to a DOM container.
 	 * @param {HTMLElement} container - Host element for the SVG graph.
-	 * @param {object} config - Timeline configuration object.
+	 * @param {import("./types.js").TimelineConfig} config - Timeline configuration object.
 	 * @param {string} [locale] - BCP 47 locale tag used to render labels.
 	 * @throws {Error} When the configuration is not a valid object.
 	 */

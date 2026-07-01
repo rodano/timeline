@@ -5,8 +5,8 @@ import {ValueSymbol} from './value_symbol.js';
 
 /**
  * Compare two values so they can be sorted in reverse chronological order.
- * @param {{date: Date}} value_1 - First value.
- * @param {{date: Date}} value_2 - Second value.
+ * @param {import("./types.js").ValueConfig} value_1 - First value.
+ * @param {import("./types.js").ValueConfig} value_2 - Second value.
  * @returns {number} Standard comparator result (negative, zero or positive).
  */
 function value_comparator(value_1, value_2) {
@@ -27,7 +27,7 @@ export class Section {
 	/**
 	 * Build a Section from a raw configuration object.
 	 * @param {object} timeline - Owning timeline.
-	 * @param {object} config - Raw section configuration object.
+	 * @param {import("./types.js").SectionConfig} config - Raw section configuration object.
 	 * @throws {Error} When the scale is invalid or a value has an invalid date.
 	 */
 	constructor(timeline, config) {
@@ -41,6 +41,7 @@ export class Section {
 		this.position = config.position;
 		this.hiddenLegend = config.hiddenLegend;
 		this.tooltip = config.tooltip;
+		this.unit = config.unit;
 
 		//style
 		this.color = config.color;

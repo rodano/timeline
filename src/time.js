@@ -1,4 +1,17 @@
 /**
+ * A time unit (year, month, day, ...) supported by the timeline.
+ *
+ * Each unit knows how to reset a Date's finer-grained fields, which
+ * "interesting" intervals to consider when picking graduations, and how to
+ * snap a Date back to the previous boundary matching a chosen interval.
+ * @typedef {object} TimeUnitDefinition
+ * @property {string} name - Uppercase identifier of the unit (e.g. "YEARS").
+ * @property {number} start - Default value the field takes when reset (e.g. 1 for DAYS, 0 for HOURS).
+ * @property {number[]} interests - Ordered list of intervals to consider, from coarsest to finest.
+ * @property {(date: Date, interest?: number) => Date} previous_interesting - Snap the given date back to the previous boundary matching the interval.
+ */
+
+/**
  * Enumeration of time units used by the timeline. Each entry describes how to
  * snap a Date back to the previous "interesting" boundary for that unit.
  */
