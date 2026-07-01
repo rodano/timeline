@@ -126,7 +126,6 @@ function add_margin(t) {
 }
 
 export class Timeline {
-
 	constructor(container, config, locale) {
 		if(!Object.isObject(config)) {
 			throw new Error('Configuration parameter must be an object');
@@ -381,7 +380,7 @@ export class Timeline {
 		this.container.appendChild(this.svg);
 
 		//buttons
-		const buttons = SVG.Group({transform: `translate(${MARGIN + this.config.legendWidth / 2},${this.height - MARGIN - 10})`,});
+		const buttons = SVG.Group({transform: `translate(${MARGIN + this.config.legendWidth / 2},${this.height - MARGIN - 10})`});
 		this.svg.appendChild(buttons);
 
 		//download
@@ -395,7 +394,7 @@ export class Timeline {
 		//in this case, the bbox will return with the size of the text with the default font, which will be wrong
 		//to mitigate this, the text is center in its box with "text-anchor=middle" and more space is added around the text
 		const box = label.getBBox();
-		const background = SVG.Rectangle(-(box.width / 2 + 8), - box.height, box.width + 2 * 8, box.height + 8);
+		const background = SVG.Rectangle(-(box.width / 2 + 8), -box.height, box.width + 2 * 8, box.height + 8);
 		download.appendChild(background);
 		//make text go over
 		download.appendChild(label);
@@ -420,11 +419,11 @@ export class Timeline {
 			//in this case, the bbox will return with the size of the text with the default font, which will be wrong
 			//to mitigate this, the text is center in its box with "text-anchor=middle" and more space is added around the text
 			const fullscreen_box = fullscreen_label.getBBox();
-			const fullscreen_background = SVG.Rectangle(-(fullscreen_box.width / 2 + 8), - fullscreen_box.height, fullscreen_box.width + 2 * 8, fullscreen_box.height + 8);
+			const fullscreen_background = SVG.Rectangle(-(fullscreen_box.width / 2 + 8), -fullscreen_box.height, fullscreen_box.width + 2 * 8, fullscreen_box.height + 8);
 			fullscreen.appendChild(fullscreen_background);
 			//make text go over
 			fullscreen.appendChild(fullscreen_label);
-			fullscreen.addEventListener('click', async () => await this.container.requestFullscreen());
+			fullscreen.addEventListener('click', async() => await this.container.requestFullscreen());
 		}
 
 		//defs
@@ -436,8 +435,8 @@ export class Timeline {
 			.filter(s => s.references.length > 1)
 			.forEach(section => {
 				const gradient = SVG.Element('linearGradient', {id: this.generateId(`gradient_${section.id}`), x1: '0', x2: '0', y1: '0', y2: '100%'});
-				gradient.appendChild(SVG.Element('stop', {offset: '0', 'stop-color': section.references.first().color}));
-				gradient.appendChild(SVG.Element('stop', {offset: '100%', 'stop-color': section.references.last().color}));
+				gradient.appendChild(SVG.Element('stop', {'offset': '0', 'stop-color': section.references.first().color}));
+				gradient.appendChild(SVG.Element('stop', {'offset': '100%', 'stop-color': section.references.last().color}));
 				defs.appendChild(gradient);
 			});
 
@@ -582,7 +581,7 @@ export class Timeline {
 		//graphs x-axis
 		//two containers are required to avoid the clip to apply on the translated element
 		const x_axis_container = SVG.Group({'clip-path': `url(#${this.generateId('graphs_xaxis_clip')}`});
-		this.xaxisSubcontainer = SVG.Group({'transform': `translate(0,${this.graphsHeight})`});
+		this.xaxisSubcontainer = SVG.Group({transform: `translate(0,${this.graphsHeight})`});
 		x_axis_container.appendChild(this.xaxisSubcontainer);
 		this.graphsContainer.appendChild(x_axis_container);
 		//graphs
@@ -595,7 +594,7 @@ export class Timeline {
 		//error frame
 		this.errorFrame = SVG.Group({id: this.generateId('error'), transform: `translate(${this.config.legendWidth + MARGIN},${MARGIN})`, style: 'display: none;'});
 		this.errorFrame.appendChild(SVG.Rectangle(0, 0, this.graphsWidth, this.graphsHeight, {class: 'error_frame'}));
-		this.errorFrame.appendChild(SVG.Rectangle(this.graphsWidth / 2 - 40, this.graphsHeight / 2 - 15, 80, 30, {rx: '2', ry: '2', 'stroke-width': 0, fill: '#bbb', opacity: 0.8}));
+		this.errorFrame.appendChild(SVG.Rectangle(this.graphsWidth / 2 - 40, this.graphsHeight / 2 - 15, 80, 30, {'rx': '2', 'ry': '2', 'stroke-width': 0, 'fill': '#bbb', 'opacity': 0.8}));
 		this.errorFrame.appendChild(SVG.Text(this.graphsWidth / 2 - 30, this.graphsHeight / 2 + 5, this.getLabel('no_data'), {lengthAdjust: 'spacing', fill: 'white'}));
 		this.svg.appendChild(this.errorFrame);
 
@@ -609,12 +608,12 @@ export class Timeline {
 				//one visible section must remain
 				if(that.sections.some(s => !s.hidden && s.id !== id)) {
 					section.hidden = true;
-					this.style.opacity = 0.4;
+					this.style.opacity = '0.4';
 				}
 			}
 			else {
 				section.hidden = false;
-				this.style.opacity = 1;
+				this.style.opacity = '1';
 			}
 			//update graphs every time
 			that.drawGraphs();
@@ -628,11 +627,11 @@ export class Timeline {
 			if(!section.hidden) {
 				if(!section.referencesHidden) {
 					section.referencesHidden = true;
-					this.style.opacity = 0.4;
+					this.style.opacity = '0.4';
 				}
 				else {
 					section.referencesHidden = false;
-					this.style.opacity = 1;
+					this.style.opacity = '1';
 				}
 				//update graphs every time
 				that.drawGraphs();
@@ -672,7 +671,7 @@ export class Timeline {
 				legend_positions.push(y_position);
 
 				//create legend group
-				const legend_group = SVG.Group({id: `legend_${section.id}`, style: 'cursor: pointer;', 'data-section-id': section.id});
+				const legend_group = SVG.Group({'id': `legend_${section.id}`, 'style': 'cursor: pointer;', 'data-section-id': section.id});
 				legend_group.addEventListener('click', manage_toggle_section);
 				if(section.hidden) {
 					legend_group.style.opacity = '0.4';
@@ -696,7 +695,7 @@ export class Timeline {
 				const references = section.references.filter(r => r.valid);
 				if(!references.isEmpty()) {
 					//create dedicated group for section references
-					const legend_group_references = SVG.Group({style: 'cursor: pointer;', 'data-section-id': section.id});
+					const legend_group_references = SVG.Group({'style': 'cursor: pointer;', 'data-section-id': section.id});
 					legend_group_references.addEventListener('click', manage_toggle_reference);
 					if(section.hidden || section.referencesHidden) {
 						legend_group_references.style.opacity = '0.4';
@@ -867,7 +866,7 @@ export class Timeline {
 			grading_container.appendChild(SVG.Rectangle(0, 0, this.graphsWidth, this.config.scrollerHeight, {class: 'scroller_frame'}));
 
 			//draw scroller representation
-			grading_container.appendChild(SVG.Rectangle(0, 0, this.graphsWidth, this.config.scrollerHeight, {'clip-path': `url(#${this.generateId('scroller_clip')})`, style: 'fill: white;'}));
+			grading_container.appendChild(SVG.Rectangle(0, 0, this.graphsWidth, this.config.scrollerHeight, {'clip-path': `url(#${this.generateId('scroller_clip')})`, 'style': 'fill: white;'}));
 
 			//scroller representation clip
 			const scroller_clip = SVG.Element('clipPath', {id: this.generateId('scroller_clip')});
@@ -898,7 +897,7 @@ export class Timeline {
 							if(interest > 1) {
 								label = `${label} - ${date.getFullUnitValueLabel(unit, this.locale)}`;
 							}
-							grading_container.appendChild(SVG.Text(text_position, y_position, label, {class: 'scroller_grading_label', 'text-anchor': 'middle'}));
+							grading_container.appendChild(SVG.Text(text_position, y_position, label, {'class': 'scroller_grading_label', 'text-anchor': 'middle'}));
 						}
 						previous_position = position;
 						date.addDuration(unit, interest);
@@ -1094,7 +1093,7 @@ export class Timeline {
 					//display only the simple label for the first level unit
 					//display full label for the second level unit
 					const date_label = unit_index === 0 ? date.getUnitValueLabel(unit, this.locale) : date.getFullUnitValueLabel(unit, this.locale);
-					this.xaxisSubcontainer.appendChild(SVG.Text(position, 15 * (1 + unit_index), date_label, {class: 'grading_label', 'text-anchor': 'middle'}));
+					this.xaxisSubcontainer.appendChild(SVG.Text(position, 15 * (1 + unit_index), date_label, {'class': 'grading_label', 'text-anchor': 'middle'}));
 					date.addDuration(unit, interest);
 				}
 				unit_index++;
@@ -1121,7 +1120,7 @@ export class Timeline {
 
 				//draw unit if any
 				if(section.unit) {
-					axis_group.appendChild(SVG.Text(scale_x_position + 2, section_offset -10, section.unit, {class: 'grading_label', style: `fill: ${section.color}`}));
+					axis_group.appendChild(SVG.Text(scale_x_position + 2, section_offset - 10, section.unit, {class: 'grading_label', style: `fill: ${section.color}`}));
 				}
 
 				//for ranks greater than one, redraw a vertical line
@@ -1152,7 +1151,7 @@ export class Timeline {
 						const grading_label = SVG.Text(0, position + 3, grading_text, {class: 'grading_label', style: `fill: ${section.color}`});
 						axis_group.appendChild(grading_label);
 						//offset label by its length in order to simulate a right align property
-						const x_position = section.scale.position === 'RIGHT' ? scale_x_position + 10 : - grading_label.getBBox().width - 10;
+						const x_position = section.scale.position === 'RIGHT' ? scale_x_position + 10 : -grading_label.getBBox().width - 10;
 						grading_label.setAttribute('x', x_position.toString());
 						//do not create a line for 0 if this section is at the bottom of the graph in order not to overwrite graph frame
 						if(section.position.start > 0 || value_offset > 0) {
@@ -1499,6 +1498,7 @@ export class Timeline {
 				}
 			});
 	}
+
 	getLabel(string) {
 		return GetLabel(string, this.locale);
 	}
