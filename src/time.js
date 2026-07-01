@@ -1,15 +1,3 @@
-function reset_fields(date, until_unit) {
-	const reset_date = date.clone();
-	for(let i = TimeUnits.length - 1; i >= 0; i--) {
-		const unit = TimeUnits[i];
-		if(unit === until_unit) {
-			break;
-		}
-		reset_date.setUnitValue(unit, unit.start);
-	}
-	return reset_date;
-}
-
 const TimeUnit = {
 	YEARS: {
 		name: 'YEARS',
@@ -91,6 +79,18 @@ const TimeUnit = {
 };
 
 const TimeUnits = [TimeUnit.YEARS, TimeUnit.MONTHS, TimeUnit.DAYS, TimeUnit.HOURS, TimeUnit.MINUTES, TimeUnit.SECONDS, TimeUnit.MILLISECONDS];
+
+function reset_fields(date, until_unit) {
+	const reset_date = date.clone();
+	for(let i = TimeUnits.length - 1; i >= 0; i--) {
+		const unit = TimeUnits[i];
+		if(unit === until_unit) {
+			break;
+		}
+		reset_date.setUnitValue(unit, unit.start);
+	}
+	return reset_date;
+}
 
 Date.prototype.getUnitValue = function(unit) {
 	switch(unit) {
