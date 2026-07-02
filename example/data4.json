@@ -48,7 +48,6 @@
 				{
 					"ongoing": false,
 					"label": "Event 1",
-					"link": "/4",
 					"metadata": {},
 					"date_string": "2021-12-06T06:00:00.064Z"
 				}
@@ -85,7 +84,6 @@
 				{
 					"ongoing": false,
 					"label": "Event 2",
-					"link": "/4",
 					"metadata": {},
 					"date_string": "2021-12-06T06:00:00.512Z"
 				}

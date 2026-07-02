@@ -19,19 +19,16 @@
 			"values": [
 				{
 					"label": "Baseline visit",
-					"link": "/crf/11/10",
 					"ongoing": false,
 					"date_string": "2021-03-15T11:38:12Z"
 				},
 				{
 					"label": "Visit day 1",
-					"link": "/crf/11/6",
 					"ongoing": false,
 					"date_string": "2021-03-16T07:42:06Z"
 				},
 				{
 					"label": "Visit day 2",
-					"link": "/crf/11/24",
 					"ongoing": false,
 					"date_string": "2021-03-17T18:35:46Z"
 				}
@@ -106,15 +103,13 @@
 					"label": "Avonex",
 					"ongoing": false,
 					"date_string": "2021-02-27T00:00:00Z",
-					"end_date_string": "2021-02-28T00:00:00Z",
-					"link": "/crf/11/10"
+					"end_date_string": "2021-02-28T00:00:00Z"
 				},
 				{
 					"label": "Betaferon",
 					"ongoing": true,
 					"date_string": "2021-03-01T00:00:00Z",
-					"end_date_string": "2021-03-17T00:00:00Z",
-					"link": "/crf/11/10"
+					"end_date_string": "2021-03-17T00:00:00Z"
 				}
 			],
 			"id": "DMT",
@@ -149,13 +144,11 @@
 			"values": [
 				{
 					"label": "Level 1 relapse",
-					"link": "/crf/11/6",
 					"ongoing": false,
 					"date_string": "2021-03-15T14:30:28Z"
 				},
 				{
 					"label": "Level 2 relapse",
-					"link": "/crf/11/6",
 					"ongoing": false,
 					"date_string": "2021-03-16T05:48:12Z"
 				}
@@ -198,8 +191,7 @@
 					"metadata": {
 						"rank": 3,
 						"status": "good"
-					},
-					"link": "/crf/11/10"
+					}
 				},
 				{
 					"value": 3.5,
@@ -209,8 +201,7 @@
 					"metadata": {
 						"rank": 45,
 						"status": "bad"
-					},
-					"link": "/crf/11/10"
+					}
 				},
 				{
 					"value": 3.5,
@@ -220,8 +211,7 @@
 					"metadata": {
 						"rank": 45,
 						"status": "bad"
-					},
-					"link": "/crf/11/10"
+					}
 				}
 			],
 			"id": "EDSS",
