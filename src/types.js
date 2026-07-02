@@ -49,6 +49,7 @@
  * @property {Date} [date] - Parsed at runtime from `date_string`.
  * @property {Date} [end_date] - Parsed at runtime from `end_date_string`.
  * @property {object} [timeframe] - Built at runtime from `date` and `end_date`.
+ * @property {object} [metadata] - Optional metadata associated with the value.
  */
 
 /**
