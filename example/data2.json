@@ -1,10 +1,7 @@
 {
-	"description": {},
-	"entity": "TIMELINE_GRAPH",
 	"height": 600,
 	"id": "PATIENT_OVERVIEW",
 	"legendWidth": 200,
-	"longname": {},
 	"periods": [
 		{
 			"label": "Study",
@@ -65,21 +62,14 @@
 			"color": "#808080",
 			"position": {
 				"start": null,
-				"stop": null,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": null
 			},
 			"mark": "CIRCLE",
 			"label": {
 				"en": "Visits"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": false,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "${entry.label}\n${entry.date.toDisplay()}"
 			},
@@ -105,21 +95,14 @@
 			"color": "#000000",
 			"position": {
 				"start": null,
-				"stop": null,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": null
 			},
 			"mark": "CIRCLE",
 			"label": {
 				"en": "Expected visits"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": true,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "${entry.label} (expected)\n${entry.date.toDisplay()}"
 			},
@@ -149,21 +132,14 @@
 			"color": "#00bf00",
 			"position": {
 				"start": 90,
-				"stop": 90,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 90
 			},
 			"mark": "CIRCLE",
 			"label": {
 				"en": "DMT"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": false,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
 			},
@@ -177,18 +153,13 @@
 			"color": "#00ff00",
 			"position": {
 				"start": 85,
-				"stop": 85,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 85
 			},
 			"label": {
 				"en": "Other treatment"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
 			"mark": "CIRCLE",
 			"hiddenLegend": false,
-			"hideDoneEvent": false,
-			"useScopePaths": false,
-			"hideExpectedEvent": false,
 			"tooltip": {
 				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
 			},
@@ -215,18 +186,13 @@
 			"color": "#840084",
 			"position": {
 				"start": 70,
-				"stop": 70,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 70
 			},
 			"label": {
 				"en": "Pregnancies"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
 			"mark": "CIRCLE",
 			"hiddenLegend": false,
-			"hideDoneEvent": false,
-			"useScopePaths": false,
-			"hideExpectedEvent": false,
 			"tooltip": {
 				"en": "Begin date: ${entry.date.toDisplay()}"
 			},
@@ -250,8 +216,7 @@
 			"hidden": false,
 			"position": {
 				"stop": 65,
-				"start": 65,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"start": 65
 			},
 			"color": "#666",
 			"label": {
@@ -259,19 +224,13 @@
 			},
 			"mark": "SQUARE",
 			"hiddenLegend": false,
-			"hideDoneEvent": false,
-			"attributeIds": [],
-			"eventGroupIds": [],
 			"tooltip": {
 				"en": "Date of first symptoms\n${entry.date.toDisplay()}"
 			},
 			"strokeColor": "#000000",
 			"opacity": 1.0,
-			"useScopePaths": false,
 			"dashed": false,
-			"references": [],
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false
+			"references": []
 		},
 		{
 			"values": [
@@ -309,21 +268,14 @@
 			"color": "#ff0000",
 			"position": {
 				"start": 60,
-				"stop": 60,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 60
 			},
 			"mark": "DIAMOND",
 			"label": {
 				"en": "Relapses"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": false,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "Relapse\nStart date: ${entry.date.toDisplay()}"
 			},
@@ -337,18 +289,13 @@
 			"color": "#00ff00",
 			"position": {
 				"start": 55,
-				"stop": 55,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 55
 			},
 			"label": {
 				"en": "Laboratory test"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
 			"mark": "CIRCLE",
 			"hiddenLegend": false,
-			"hideDoneEvent": false,
-			"useScopePaths": false,
-			"hideExpectedEvent": false,
 			"tooltip": {
 				"en": "${entry.metadata.type}\n${entry.label}"
 			},
@@ -422,29 +369,21 @@
 				"min": 0,
 				"max": 1,
 				"labelInterval": 0.2,
-				"entity": "TIMELINE_GRAPH_SECTION_SCALE",
 				"decimal": 1,
 				"markInterval": 0.1
 			},
 			"color": "red",
 			"position": {
 				"start": 0,
-				"stop": 40,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 40
 			},
 			"mark": "CIRCLE",
 			"label": {
 				"en": "MRI lesion"
 			},
 			"unit": "mm^3",
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": true,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "EDSS\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}"
 			},
@@ -498,28 +437,20 @@
 				"min": 0,
 				"max": 10,
 				"labelInterval": 2,
-				"entity": "TIMELINE_GRAPH_SECTION_SCALE",
 				"decimal": 1,
 				"markInterval": 0.5
 			},
 			"color": "#ff9966",
 			"position": {
 				"start": 0,
-				"stop": 40,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 40
 			},
 			"mark": "CIRCLE",
 			"label": {
 				"en": "EDSS"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": false,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "EDSS\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}\nRank: ${entry.metadata.rank}"
 			},
@@ -535,104 +466,87 @@
 						{
 							"value": 2.0,
 							"label": "2.0",
-							"timepoint": "0",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "0"
 						},
 						{
 							"value": 2.0,
 							"label": "2.0",
-							"timepoint": "6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "6m"
 						},
 						{
 							"value": 3.0,
 							"label": "3.0",
-							"timepoint": "1y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "1y"
 						},
 						{
 							"value": 3.0,
 							"label": "3.0",
-							"timepoint": "1y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "1y6m"
 						},
 						{
 							"value": 3.0,
 							"label": "3.0",
-							"timepoint": "2y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "2y"
 						},
 						{
 							"value": 4.0,
 							"label": "4.0",
-							"timepoint": "2y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "2y6m"
 						},
 						{
 							"value": 4.0,
 							"label": "4.0",
-							"timepoint": "3y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "3y"
 						},
 						{
 							"value": 4.0,
 							"label": "4.0",
-							"timepoint": "3y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "3y6m"
 						},
 						{
 							"value": 5.0,
 							"label": "5.0",
-							"timepoint": "4y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "4y"
 						},
 						{
 							"value": 5.0,
 							"label": "5.0",
-							"timepoint": "4y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "4y6m"
 						},
 						{
 							"value": 5.0,
 							"label": "5.0",
-							"timepoint": "5y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "5y"
 						},
 						{
 							"value": 5.5,
 							"label": "5.5",
-							"timepoint": "5y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "5y6m"
 						},
 						{
 							"value": 5.5,
 							"label": "5.5",
-							"timepoint": "6y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "6y"
 						},
 						{
 							"value": 5.5,
 							"label": "5.5",
-							"timepoint": "6y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "6y6m"
 						},
 						{
 							"value": 6.0,
 							"label": "6.0",
-							"timepoint": "7y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "7y"
 						},
 						{
 							"value": 6.0,
 							"label": "6.0",
-							"timepoint": "7y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "7y6m"
 						},
 						{
 							"value": 6.0,
 							"label": "6.0",
-							"timepoint": "8y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "8y"
 						}
 					],
 					"color": "#ffcc44",
@@ -640,7 +554,6 @@
 						"en": "80% percentile\n${entry.label}"
 					},
 					"dashed": true,
-					"entity": "TIMELINE_GRAPH_SECTION_REFERENCE",
 					"referenceSectionId": "FIRST_SYMPTOMS"
 				},
 				{
@@ -652,104 +565,87 @@
 						{
 							"value": 1.0,
 							"label": "1.0",
-							"timepoint": "0",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "0"
 						},
 						{
 							"value": 1.0,
 							"label": "1.0",
-							"timepoint": "6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "6m"
 						},
 						{
 							"value": 1.5,
 							"label": "1.5",
-							"timepoint": "1y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "1y"
 						},
 						{
 							"value": 1.5,
 							"label": "1.5",
-							"timepoint": "1y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "1y6m"
 						},
 						{
 							"value": 2.0,
 							"label": "2.0",
-							"timepoint": "2y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "2y"
 						},
 						{
 							"value": 2.0,
 							"label": "2.0",
-							"timepoint": "2y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "2y6m"
 						},
 						{
 							"value": 2.5,
 							"label": "2.5",
-							"timepoint": "3y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "3y"
 						},
 						{
 							"value": 2.5,
 							"label": "2.5",
-							"timepoint": "3y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "3y6m"
 						},
 						{
 							"value": 2.5,
 							"label": "2.5",
-							"timepoint": "4y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "4y"
 						},
 						{
 							"value": 3.0,
 							"label": "3.0",
-							"timepoint": "4y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "4y6m"
 						},
 						{
 							"value": 3.0,
 							"label": "3.0",
-							"timepoint": "5y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "5y"
 						},
 						{
 							"value": 3.0,
 							"label": "3.0",
-							"timepoint": "5y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "5y6m"
 						},
 						{
 							"value": 3.5,
 							"label": "3.5",
-							"timepoint": "6y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "6y"
 						},
 						{
 							"value": 3.5,
 							"label": "3.5",
-							"timepoint": "6y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "6y6m"
 						},
 						{
 							"value": 3.5,
 							"label": "3.5",
-							"timepoint": "7y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "7y"
 						},
 						{
 							"value": 4.0,
 							"label": "4.0",
-							"timepoint": "7y6m",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "7y6m"
 						},
 						{
 							"value": 4.0,
 							"label": "4.0",
-							"timepoint": "8y",
-							"entity": "TIMELINE_GRAPH_SECTION_REFERENCE_ENTRY"
+							"timepoint": "8y"
 						}
 					],
 					"color": "#ffddcc",
@@ -757,7 +653,6 @@
 						"en": "20% percentile\n${entry.label}"
 					},
 					"dashed": true,
-					"entity": "TIMELINE_GRAPH_SECTION_REFERENCE",
 					"referenceSectionId": "FIRST_SYMPTOMS"
 				}
 			]
@@ -783,21 +678,14 @@
 			"color": "#000000",
 			"position": {
 				"start": 99,
-				"stop": 99,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 99
 			},
 			"mark": "CIRCLE",
 			"label": {
 				"en": "Medical centers"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": false,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "${entry.label || section.label.en || ''}\nFrom: ${entry.date.toDisplay()}\nTo: ${entry.ongoing ? '-' : entry.end_date.toDisplay()}"
 			},
@@ -1185,28 +1073,20 @@
 				"min": 0,
 				"max": 500000,
 				"labelInterval": 100000,
-				"entity": "TIMELINE_GRAPH_SECTION_SCALE",
 				"decimal": 0,
 				"markInterval": 50000
 			},
 			"color": "#411bf3",
 			"position": {
 				"start": 0,
-				"stop": 40,
-				"entity": "TIMELINE_GRAPH_SECTION_POSITION"
+				"stop": 40
 			},
 			"mark": "CIRCLE",
 			"label": {
 				"en": "Monthly steps"
 			},
-			"entity": "TIMELINE_GRAPH_SECTION",
-			"hideExpectedEvent": false,
-			"hideDoneEvent": false,
 			"dashed": false,
-			"eventGroupIds": [],
 			"opacity": 1,
-			"useScopePaths": false,
-			"attributeIds": [],
 			"tooltip": {
 				"en": "Steps\nDate: ${entry.date.toDisplay()}\nValue: ${entry.value}"
 			},
@@ -1214,9 +1094,6 @@
 			"hiddenLegend": false
 		}
 	],
-	"shortname": {
-		"en": "Patient overview"
-	},
 	"showScroller": true,
 	"width": 1000
 }
