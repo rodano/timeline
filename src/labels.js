@@ -9,7 +9,8 @@ const LABELS = {
 		legend_tooltip: 'Click to show or hide',
 		legend_reference_tooltip: 'Click to show or hide references curves',
 		download: 'Download',
-		fullscreen: 'Fullscreen'
+		fullscreen: 'Fullscreen',
+		exit_fullscreen: 'Exit'
 	},
 	'fr-FR': {
 		max: 'Max',
@@ -18,7 +19,8 @@ const LABELS = {
 		legend_tooltip: 'Cliquer pour afficher ou masquer',
 		legend_reference_tooltip: 'Cliquer pour afficher ou masquer les courbes de référence',
 		download: 'Télécharger',
-		fullscreen: 'Plein écran'
+		fullscreen: 'Plein écran',
+		exit_fullscreen: 'Quitter'
 	}
 };
 

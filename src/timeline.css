@@ -1,4 +1,7 @@
 /* global */
+*:has(> .timeline)::backdrop {
+	background-color: white;
+}
 .timeline text {
 	font-size: 12px;
 	user-select: none;

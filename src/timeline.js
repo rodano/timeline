@@ -227,41 +227,26 @@ export class Timeline {
 			});
 		}
 
-		//redraw graph when window is resized
-		if(!this.config.width) {
-			window.addEventListener('resize', () => {
-				//redraw only if the graph is displayed
-				if(this.container.offsetParent) {
-					this.redraw();
-				}
-			});
-		}
+		//calculate dimensions
+		this.recalculateDimensions();
 
-		const original_dimension = {width: this.config.width, height: this.config.height};
-
-		document.addEventListener('fullscreenchange', () => {
-			if(document.fullscreenElement === this.container) {
-				this.container.style.width = '100%';
-				this.container.style.height = '100%';
-				this.container.style.backgroundColor = 'white';
-				this.container.style.padding = '10px';
-				//let some time for the browser to redraw the container
-				setTimeout(() => {
-					this.config.width = this.container.offsetWidth - 20;
-					this.config.height = this.container.offsetHeight - 20;
-					this.redraw();
-				}, 5);
+		//observe the container to keep the SVG dimension in sync with any size change
+		const resize_observer = new ResizeObserver(() => {
+			//redraw only if the graph has already been drawn
+			if(!this.svg) {
+				return;
 			}
-			else {
-				this.container.style.width = '';
-				this.container.style.height = '';
-				this.container.style.backgroundColor = '';
-				this.container.style.padding = '';
-				this.config.width = original_dimension.width;
-				this.config.height = original_dimension.height;
+			//redraw only if the graph is currently displayed
+			if(!this.container.offsetParent && !this.isFullscreen()) {
+				return;
+			}
+
+			requestAnimationFrame(() => {
+				this.recalculateDimensions();
 				this.redraw();
-			}
+			});
 		});
+		resize_observer.observe(this.container);
 
 		this.init();
 	}
@@ -422,6 +407,35 @@ export class Timeline {
 	}
 
 	/**
+	 * Check if the timeline is displayed fullscreen.
+	 * @returns {boolean} True when the timeline is in fullscreen mode.
+	 */
+	isFullscreen() {
+		return document.fullscreenElement === this.container;
+	}
+
+	/**
+	 * Recalculate the dimensions of the graph.
+	 * @returns {void}
+	 */
+	recalculateDimensions() {
+		const style = window.getComputedStyle(this.container);
+		const width = this.container.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - MARGIN;
+		const height = this.container.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - MARGIN;
+
+		//in fullscreen, bypass the configured dimension and fit the SVG in the container's content area
+		if(this.isFullscreen()) {
+			this.width = width;
+			this.height = height;
+		}
+		else {
+			//if size has not been specified in graph configuration, fill the HTML container
+			this.width = this.config.width || width;
+			this.height = this.config.height || height;
+		}
+	}
+
+	/**
 	 * Remove the existing SVG and re-render the whole graph.
 	 * @returns {void}
 	 */
@@ -444,10 +458,6 @@ export class Timeline {
 
 		//calculate size
 		const right_ranks = Math.max(0, ...this.sections.map(s => s.scale?.rank || 0));
-
-		//if size has not been specified in graph configuration, fill the HTML container
-		this.width = this.config.width || this.container.offsetWidth - 10;
-		this.height = this.config.height;
 
 		//set graph min width
 		const min_width = this.config.legendWidth + MARGIN * 2 + GRADUATION_PADDING * right_ranks + 100;
@@ -493,23 +503,29 @@ export class Timeline {
 		};
 
 		//fullscreen
-		if(document.fullscreenElement !== this.container) {
-			const fullscreen = SVG.Group({transform: 'translate(0,-30)', class: 'button'});
-			buttons.appendChild(fullscreen);
-			//create label
-			const fullscreen_label = SVG.Text(0, 0, this.getLabel('fullscreen'), {'text-anchor': 'middle'});
-			fullscreen.appendChild(fullscreen_label);
-			//create background
-			//when retrieving the bbox, the font may still not have been loaded
-			//in this case, the bbox will return with the size of the text with the default font, which will be wrong
-			//to mitigate this, the text is center in its box with "text-anchor=middle" and more space is added around the text
-			const fullscreen_box = fullscreen_label.getBBox();
-			const fullscreen_background = SVG.Rectangle(-(fullscreen_box.width / 2 + 8), -fullscreen_box.height, fullscreen_box.width + 2 * 8, fullscreen_box.height + 8);
-			fullscreen.appendChild(fullscreen_background);
-			//make text go over
-			fullscreen.appendChild(fullscreen_label);
-			fullscreen.addEventListener('click', async() => await this.container.requestFullscreen());
-		}
+		const fullscreen = SVG.Group({transform: 'translate(0,-30)', class: 'button'});
+		buttons.appendChild(fullscreen);
+		//create label
+		const fullscreen_label_id = this.isFullscreen() ? 'exit_fullscreen' : 'fullscreen';
+		const fullscreen_label = SVG.Text(0, 0, this.getLabel(fullscreen_label_id), {'text-anchor': 'middle'});
+		fullscreen.appendChild(fullscreen_label);
+		//create background
+		//when retrieving the bbox, the font may still not have been loaded
+		//in this case, the bbox will return with the size of the text with the default font, which will be wrong
+		//to mitigate this, the text is center in its box with "text-anchor=middle" and more space is added around the text
+		const fullscreen_box = fullscreen_label.getBBox();
+		const fullscreen_background = SVG.Rectangle(-(fullscreen_box.width / 2 + 8), -fullscreen_box.height, fullscreen_box.width + 2 * 8, fullscreen_box.height + 8);
+		fullscreen.appendChild(fullscreen_background);
+		//make text go over
+		fullscreen.appendChild(fullscreen_label);
+		fullscreen.addEventListener('click', async() => {
+			if(this.isFullscreen()) {
+				await document.exitFullscreen();
+			}
+			else {
+				await this.container.requestFullscreen();
+			}
+		});
 
 		//defs
 		const defs = SVG.Element('defs');
@@ -833,7 +849,7 @@ export class Timeline {
 
 		//periods
 		if(this.config.periods.length > 1) {
-			this.periodsContainer = SVG.Group({id: this.generateId('periods'), transform: `translate(${that.config.legendWidth + MARGIN},${this.config.height - this.config.scrollerHeight - MARGIN - SCROLLER_PERIODS_HEIGHT})`, class: 'periods'});
+			this.periodsContainer = SVG.Group({id: this.generateId('periods'), transform: `translate(${that.config.legendWidth + MARGIN},${this.height - this.config.scrollerHeight - MARGIN - SCROLLER_PERIODS_HEIGHT})`, class: 'periods'});
 			this.svg.appendChild(this.periodsContainer);
 
 			this.periodsContainer.appendChild(SVG.Text(0, 10, this.getLabel('periods')));
@@ -859,7 +875,7 @@ export class Timeline {
 		}
 
 		//selected period
-		this.selectedPeriodContainer = SVG.Text(that.config.legendWidth + MARGIN + this.graphsWidth, this.config.height - this.config.scrollerHeight - MARGIN - SCROLLER_PERIODS_HEIGHT + 10, '', {'text-anchor': 'end'});
+		this.selectedPeriodContainer = SVG.Text(that.config.legendWidth + MARGIN + this.graphsWidth, this.height - this.config.scrollerHeight - MARGIN - SCROLLER_PERIODS_HEIGHT + 10, '', {'text-anchor': 'end'});
 		this.svg.appendChild(this.selectedPeriodContainer);
 
 		//scroller
@@ -1003,7 +1019,7 @@ export class Timeline {
 		}
 
 		if(this.config.showScroller) {
-			const scroller = SVG.Group({id: this.generateId('scroller'), transform: `translate(${that.config.legendWidth + MARGIN},${this.config.height - this.config.scrollerHeight - MARGIN})`});
+			const scroller = SVG.Group({id: this.generateId('scroller'), transform: `translate(${that.config.legendWidth + MARGIN},${this.height - this.config.scrollerHeight - MARGIN})`});
 			this.svg.appendChild(scroller);
 
 			//grading container
